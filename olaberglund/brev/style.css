@@ -1,0 +1,38 @@
+body {
+  background-color: black;
+  background-image: radial-gradient(
+    rgba(0, 0, 150, 0.75), black 120%
+  );
+  height: 100vh;
+  color: white;
+  font: 1.3rem Inconsolata, monospace;
+  text-shadow: 0 0 5px #C8C8C8;
+  text-align: center;
+}
+
+::selection {
+  background: #0080FF;
+  text-shadow: none;
+}
+a:hover {
+  color: white;
+  text-decoration: underline !important;
+  text-shadow: 0 0 5px #C8C8C8, 0 0 15px #C8C8C8, 0 0 25px #C8C8C8, 0 0 35px #C8C8C8, 0 0 45px #C8C8C8;
+}
+a:link {
+  color: white;
+  text-decoration: underline;
+}
+a:visited {
+  color: gray;
+  text-decoration: none;
+}
+
+#back{
+  color: white;
+  text-decoration: none !important;
+}
+
+#script{
+  color: white;
+}

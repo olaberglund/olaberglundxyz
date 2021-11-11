@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <head>
+      <title> Olas webbsida </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">  
+      <link rel='stylesheet' type='text/css' href="style.css">
+    </head>
+    <meta charset="utf-8"/>
+    <h1>Script som uppdaterar listan</h1>
+    <p><a id="back" href="..">&#x3c;</a></p>
+    <br>
+    <div>
+      <pre>
+        <code>
+            #!/bin/bash
+
+            ls -t "$@" | tail -n +1  &#62; sorteradlista
+            destination=/home/ola/website/brev/allabrevhtml
+            (( x = 1 ))
+            (( y = $(ls *docx | wc -l) ))
+            while IFS= read -r line
+            do
+              n=$(printf %08d $x)
+              pandoc --quiet -s -f docx -t html "$line" -o "$n${line:0:-5}.html"
+              echo -ne "$x/$y \r"
+              ((x ++ ))
+            done &#60; sorteradlista
+
+            rm $destination/*
+            mv *.html "$destination"
+
+            &#62; $destination/lista
+            for f in $destination/*.html
+            do
+              filename=$(basename "$f")
+              echo "&#x3c;p&#62;&#x3c;a href=\"allabrevhtml/$filename\"&#62;${filename:8:-5}&#60;&#x3c;p&#62;" &#62;&#62; $destination/lista
+            done
+
+            sed -i '/allabrevhtml/d' /home/ola/website/brev/index.html
+            sed -i '/letters go here/r /home/ola/website/brev/allabrevhtml/lista' /home/ola/website/brev/index.html
+        </code>
+      </pre>
+    </div>
+  </body>
+</html>

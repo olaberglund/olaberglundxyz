@@ -1,0 +1,16 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <head>
+      <script type="text/javascript" data-uid="cTable" src="js/com.js" async></script> 
+      <title> Morning Scraper </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">  
+      <link rel='stylesheet' type='text/css' href="style.css"> 
+    </head>
+    <meta charset="utf-8"/>
+    <h1> Morning Scraper </h1>
+    <button onclick="getCommodity()">Hämta råvaror</button>
+    <p id="cTable">YO!</p>
+  </body>
+</html>
