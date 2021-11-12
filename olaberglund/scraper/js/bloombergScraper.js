@@ -20,12 +20,17 @@ async function getChange (name) {
   return change;
 }
 
-async function scrape() {
-  const nikkei = "Nikkei 225: " + await getChange('NIKKEI 225');
-  const shanghai = "\nShanghai composite: " + await getChange('SHANGHAI SE COMPOSITE');
-  const hangseng = "\nHang Seng index: " + await getChange('HANG SENG INDEX');
-  return nikkei + shanghai + hangseng;
+async function getIndicies() {
+  const nikkei = getChange('NIKKEI 225');
+  const shanghai = getChange('SHANGHAI SE COMPOSITE');
+  const hangseng = getChange('HANG SENG INDEX');
+  const changes = await Promise.all([nikkei, shanghai, hangseng]);
+  const message = "Nikkei: " + changes[0] + "\nShanghai composite: " + changes[1] + "\nHang Seng: " + changes[2];
+  return message;
  
 }
 
-scrape().then(res => { console.log(res); });
+getIndicies().then( (changes) => {
+  console.log(changes)
+});
+
