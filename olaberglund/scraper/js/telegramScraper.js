@@ -43,15 +43,17 @@ async function macroHref (url, n) {
 }
 
 async function scrapeMacro() {
-  const todaysMacro = await getArticle(await macroHref(URL, 0))
+  const todaysMacro = getArticle(await macroHref(URL, 0))
     .catch(e => { return "Ingen makroartikel för idag ännu."; }); 
-  const tomorrowsMacro = await getArticle(await macroHref(URL, 1))
+  const tomorrowsMacro = getArticle(await macroHref(URL, 1))
     .catch(e => { return "Ingen makroartikel för imorgon ännu."; }); 
-  return todaysMacro + tomorrowsMacro;
+  const sumMacro = await Promise.all([todaysMacro, tomorrowsMacro]);
+  return sumMacro[0] + sumMacro[1];
 }
 
 exports.scrape = async function () {
-    const macro = await scrapeMacro();
-    const commodity = await scrapeCommodity();
-    return macro + commodity;
+    const macro = scrapeMacro();
+    const commodity = scrapeCommodity();
+    const news = await Promise.all([macro, commodity]);
+    return news[0] + news[1];
 }

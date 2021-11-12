@@ -1,37 +1,29 @@
 const http = require('http');
 const tScraper = require('./telegramScraper');
 const diScraper = require('./diScraper.js');
-const fs = require('fs');
+const fs = require('fs').promises;
 
-const resolver =  (req, res) => {
-  res.writeHead(200, {'Content-type':'text/html; charset=utf-8'});
-  scrape().then(message => {
-      res.write("<pre>"+message+"</pre>");
-      res.end();
-  })
-}
-
-http.createServer(resolver).listen(3000);
-
-function scrape (callback) {
+async function scrape () {
     const telegram = tScraper.scrape();
-    const di = diScraper.scrape();
+    const di = diScraper.todaysNews();
     const indices = bloombergIndices();
-    return  /*telegram + di + "\n" + */ indices;
+    const res = await Promise.all([telegram, di, indices]);
+    return res;
 }
 
 async function bloombergIndices() {
-  fs.readFile('indices.txt', 'utf8', function(err, data) {
-    if (err) { return "Bloomberg avläsning: något gick fel"; }
-    return data;
+  const data = await fs.readFile('./indices.txt', 'utf8');
+  return data;
+}
+
+const resolver =  (req, res) => {
+  res.writeHead(200, {'Content-type':'text/html; charset=utf-8'});
+  scrape().then(dataArr => {
+    dataArr.map(data => {
+      res.write("<pre>"+data+"</pre>");
+    });
+    res.end();
   });
 }
 
-
-
-function scrape (callback) {
-  discrape
-  tscrape
-  bloomscrape
-  if err => new err
-  callback(null, telegram, di, indices);
+http.createServer(resolver).listen(3000);

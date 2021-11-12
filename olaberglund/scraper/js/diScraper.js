@@ -3,33 +3,24 @@ const cheerio = require('cheerio');
 const URL = "https://www.di.se/ravaror";
 
 
-function getRawData ( url, callback ) {
-  const { data } = axios.get(url)
-    .catch(e => { return callback(new Error("Axios")); })
-    .then(html => { callback(null, html); });
+async function getRawData ( url ) {
+  const { data } = await axios.get(url);
+  return data;
 };
 
-function todaysNews (callback) {
-  return getRawData(URL, function (err, html) {
-    if (err) throw new Error('faulty url');
-    const $ = cheerio.load(html);
-    const articles = $(".js_market-news-day.latest-news-day:contains('I dag') a");
-    const hrefs = [];
-    articles.each(function (i, elem) {
-      hrefs[i] = URL + elem.attribs.href;
-    });
-    const message = hrefs.length ? hrefs : "Inga dagsfärska nyheter från DI ännu.";
-    return message;
+const todaysNews = async () => {
+  const html = await getRawData(URL);
+  const $ = cheerio.load(html);
+  const articles = $(".js_market-news-day.latest-news-day:contains('I dag') a");
+  const hrefs = [];
+  articles.each(function (i, elem) {
+    hrefs[i] = URL + elem.attribs.href;
   });
+  const message = hrefs.length ? hrefs : "Inga dagsfärska nyheter från DI ännu.";
+  return message;
 }
 
-
-
-module.exports = todaysNews;
-
-
-
-
+exports.todaysNews = todaysNews;
 
 
 

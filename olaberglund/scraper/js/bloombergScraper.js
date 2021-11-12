@@ -21,13 +21,16 @@ async function getChange (name) {
 }
 
 async function getIndicies() {
-  const nikkei = getChange('NIKKEI 225');
-  const shanghai = getChange('SHANGHAI SE COMPOSITE');
-  const hangseng = getChange('HANG SENG INDEX');
-  const changes = await Promise.all([nikkei, shanghai, hangseng]);
-  const message = "Nikkei: " + changes[0] + "\nShanghai composite: " + changes[1] + "\nHang Seng: " + changes[2];
-  return message;
- 
+  try {
+    const nikkei = getChange('NIKKEI 225');
+    const shanghai = getChange('SHANGHAI SE COMPOSITE');
+    const hangseng = getChange('HANG SENG INDEX');
+    const changes = await Promise.all([nikkei, shanghai, hangseng]);
+    const message = "Nikkei: " + changes[0] + "\nShanghai composite: " + changes[1] + "\nHang Seng: " + changes[2];
+    return message;
+  }catch (e) {
+    return "Error: bloombergScraper";
+  }
 }
 
 getIndicies().then( (changes) => {
