@@ -20,7 +20,6 @@ async function getChange (name) {
   return change;
 }
 
-//exports.scrape = async function () {
 async function scrape() {
   const nikkei = "Nikkei 225: " + await getChange('NIKKEI 225');
   const shanghai = "\nShanghai composite: " + await getChange('SHANGHAI SE COMPOSITE');
@@ -28,4 +27,5 @@ async function scrape() {
   return nikkei + shanghai + hangseng;
  
 }
+
 scrape().then(res => { console.log(res); });
