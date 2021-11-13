@@ -33,8 +33,7 @@ async function macroHref (url, n) {
   const days = ['SÖ', 'MÅ', 'TI', 'ON', 'TO', 'FR', 'LÖ']
   const day = (function () {
     const reqDay = new Date().getDay() + n;
-    const isWeekend = (reqDay % 7) % 6 === 0; // %7 to get a day of the week and %6 to check if sat(index 6) or sun(index 0).
-    return isWeekend ? 1 : reqDay;
+    return isWeekend(reqDay) ? 1 : reqDay;
   })();
   const jQueryString = "a:contains('DETTA HÄNDER " + days[day % 7] + "')";
   const macroArticle = $(jQueryString);
@@ -42,14 +41,26 @@ async function macroHref (url, n) {
   return href;
 }
 
+function isWeekend (n) {
+  return (n % 7) % 6 === 0;
+}
+
+
 async function scrapeMacro() {
-  const todaysMacro = getArticle(await macroHref(URL, 0))
-    .catch(e => { return "\nIngen makroartikel för idag ännu."; }); 
+  const today = new Date().getDay();
+  const todaysMacro = "";
   const tomorrowsMacro = getArticle(await macroHref(URL, 1))
     .catch(e => { return "\nIngen makroartikel för imorgon ännu."; }); 
-  const sumMacro = await Promise.all([todaysMacro, tomorrowsMacro]);
-  return sumMacro[0] + sumMacro[1];
+  if(!isWeekend(today)){
+    todaysMacro = getArticle(await macroHref(URL, 0))
+      .catch(e => { return "\nIngen makroartikel för idag ännu."; }); 
+    const sumMacro = await Promise.all([todaysMacro, tomorrowsMacro]);
+    return sumMacro[0] + sumMacro[1];
+  }
+  return tomorrowsMacro;
+
 }
+
 
 exports.scrape = async function () {
     const macro = scrapeMacro();
