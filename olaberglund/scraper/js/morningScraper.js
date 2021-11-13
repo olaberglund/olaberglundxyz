@@ -1,13 +1,15 @@
 const http = require('http');
 const tScraper = require('./telegramScraper');
 const diScraper = require('./diScraper.js');
+const rekScraper = require('./rekScraper.js');
 const fs = require('fs').promises;
 
 async function scrape () {
     const telegram = tScraper.scrape();
     const di = diScraper.todaysNews();
+    const reks = rekScraper.scrape();
     const indices = bloombergIndices();
-    const res = await Promise.all([telegram, di, indices]);
+    const res = await Promise.all([telegram, di, indices, reks]);
     return res;
 }
 
