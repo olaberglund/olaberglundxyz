@@ -19,7 +19,22 @@ async function getIndicies() {
   return changes;
 }
 
-getIndicies().then( (changes) => {
+
+function isWeekend (n) {
+  return (n % 7) % 6 === 0;
+}
+
+async function scrape() {
+  const today = new Date().getDay();
+  if(isWeekend(today)){
+    return "";
+  }
+
+  const changes = await getIndicies();
+  return changes;
+}
+
+scrape().then( (changes) => {
   console.log(changes)
 });
 

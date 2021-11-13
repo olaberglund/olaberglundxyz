@@ -13,7 +13,15 @@ async function scrape () {
     return res;
 }
 
+function isWeekend (n) {
+  return (n % 7) % 6 === 0;
+}
+
 async function bloombergIndices() {
+  const today = new Date().getDay();
+  if(isWeekend(today)){
+    return "";
+  }
   const data = await fs.readFile('./indices.txt', 'utf8');
   return data;
 }
