@@ -6,7 +6,7 @@ const fs = require('fs').promises;
 
 async function scrape () {
     const telegram = tScraper.scrape();
-    const di = diScraper.todaysNews();
+    const di = diScraper.scrape();
     const reks = rekScraper.scrape();
     const indices = bloombergIndices();
     const res = await Promise.all([telegram, di, indices, reks]);
