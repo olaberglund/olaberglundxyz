@@ -31,7 +31,12 @@ async function macroHref (url, n) {
   const html = await scraper.getRawData(url);
   const $ = cheerio.load(html);
   const days = ['SÖ', 'MÅ', 'TI', 'ON', 'TO', 'FR', 'LÖ']
-  const jQueryString = "a:contains('DETTA HÄNDER " + days[(new Date().getDay() + n) % 7] + "')";
+  const day = (function () {
+    const reqDay = new Date().getDay() + n;
+    const isWeekend = (reqDay % 7) % 6 === 0; // %7 to get a day of the week and %6 to check if sat(index 6) or sun(index 0).
+    return isWeekend ? 1 : reqDay;
+  })();
+  const jQueryString = "a:contains('DETTA HÄNDER " + days[day % 7] + "')";
   const macroArticle = $(jQueryString);
   const href = macroArticle[0]?.attribs.href; 
   return href;
