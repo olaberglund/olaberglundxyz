@@ -25,7 +25,15 @@ async function rekHref (url) {
   return href;
 }
 
+function isWeekend (n) {
+  return (n % 7) % 6 === 0;
+}
+
 async function scrapeReks() {
+  const date = new Date().getDay();
+  if(isWeekend(date)) {
+    return "";
+  }
   const table = await getArticle(await rekHref(URL))
     .catch(e => { return "\nIngen sammanställning av aktierekommendationerna ännu."; }); 
   return table;
