@@ -42,7 +42,4 @@ async function scrape() {
   return news;
 }
 
-scrape().then(res => console.log(res));
-
-
 exports.scrape = scrape;
