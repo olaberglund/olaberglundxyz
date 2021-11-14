@@ -15,29 +15,34 @@ async function getNews (date)  {
   return message;
 }
 
-//Scrape friday's news if weekend, otherwise today's
 async function scrape() {
   const date = new Date();
   const today = date.getDay();
   var query = 'I dag';
 
-  if(today === 6){
-    query = 'I går';
-  }else if(today === 0){
-    query = date.getDay() - 2;
-  }else if(today === 1){
-    const sat = date.getDay() - 2;
-    const sun = 'I går';
-    const satNews = getNews(sat);
-    const sunNews = getNews(sun);
-    const news = await Promise.all([satNews, sunNews]);
-    return news[0] + news[1];
+  switch (today){
+    case 6: 
+      query = 'I går';
+      break;
+    case 0:
+      query = " " + date.getDate() - 2 + " ";
+      break;
+    case 1:
+      const mon = 'I dag';
+      const sat = " " + date.getDate() - 2 + " ";
+      const sun = 'I går';
+      const monNews = getNews(mon);
+      const satNews = getNews(sat);
+      const sunNews = getNews(sun);
+      const news = await Promise.all([monNews, satNews, sunNews]);
+      return news[0] + news[1] + news[2];
   }
 
   const news = await getNews(query);
   return news;
-
 }
+
+scrape().then(res => console.log(res));
 
 
 exports.scrape = scrape;
