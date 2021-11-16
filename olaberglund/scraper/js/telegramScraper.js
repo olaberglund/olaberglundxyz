@@ -48,11 +48,10 @@ function isWeekend (n) {
 
 async function scrapeMacro() {
   const today = new Date().getDay();
-  const todaysMacro = "";
   const tomorrowsMacro = getArticle(await macroHref(URL, 1))
     .catch(e => { return "\nIngen makroartikel för imorgon ännu."; }); 
   if(!isWeekend(today)){
-    todaysMacro = getArticle(await macroHref(URL, 0))
+    const todaysMacro = getArticle(await macroHref(URL, 0))
       .catch(e => { return "\nIngen makroartikel för idag ännu."; }); 
     const sumMacro = await Promise.all([todaysMacro, tomorrowsMacro]);
     return sumMacro[0] + sumMacro[1];
