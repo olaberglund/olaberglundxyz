@@ -3,33 +3,38 @@ import { RecordsWrapper, StyledGramophone, StyledContent } from './Home.styled'
 import { PageLayout } from './Home.styled'
 import Record from '../../components/Record/Record'
 import Typewriter from "typewriter-effect";
+import * as contents from './contents';
 
 const Home = () => {
   const [playing, setPlaying] = useState(false);
+  const [content, setContent] = useState("")
 
-  const handleClick = () => {
-    setPlaying(!playing);
+  const handleClick = (message: string) => {
+    if(message === content) return;
+    setPlaying(true);
+    setContent(message)
   }
+
 
   return (
     <PageLayout>
       <StyledGramophone playing={playing} />
       <RecordsWrapper >
-        <Record title="Hem" onClick={handleClick} />
-        <Record title="Aktuellt" onClick={handleClick} />
-        <Record title="Legacy" onClick={handleClick} />
+        {Object.values(contents).map((content, index) => (
+          <Record key={index} title={content.title} onClick={() => handleClick(content.message)} />
+        ))}
       </RecordsWrapper>
       <StyledContent>
-        {playing && <Typewriter
-          options={{cursor: "", delay: 4}}
+        { content && <Typewriter
+          options={{ cursor: "", delay: 4 }}
           onInit={(typewriter) => {
             typewriter
-              .typeString("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
-              .start();
+              .typeString(content)
+              .start()
+              .callFunction(() => setPlaying(false))
           }}
-          
         />
-        }
+}
       </StyledContent>
     </PageLayout>
   )
