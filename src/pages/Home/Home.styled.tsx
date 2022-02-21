@@ -58,5 +58,4 @@ export const StyledGramophone = styled.div<GramophoneProps>`
 export const StyledContent = styled.div`
   grid-area: content;
   overflow: scroll;
-  padding: 40px;
 `
