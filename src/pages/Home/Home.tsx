@@ -10,13 +10,16 @@ const Home = () => {
   const [content, setContent] = useState("");
 
   const handleClick = (message: string) => {
+    if(content !== "") {
+      setContent("")
+      handleClick(message)
+    }
+    setPlaying(true)
     setContent(message);
-    console.log(message);
   }
 
   const onEnd = () => {
     setPlaying(false);
-    setContent("")
   }
 
   return (
@@ -32,7 +35,7 @@ const Home = () => {
           options={{ cursor: "", delay: 4 }}
           onInit={(typewriter) => {
             typewriter
-              .pasteString(content,null)
+              .typeString(content)
               .start()
               .callFunction(onEnd)
           }}
