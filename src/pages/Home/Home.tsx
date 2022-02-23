@@ -7,35 +7,38 @@ import * as contents from './contents';
 
 const Home = () => {
   const [playing, setPlaying] = useState(false);
-  const [content, setContent] = useState("")
+  const [content, setContent] = useState("");
 
   const handleClick = (message: string) => {
-    if(message === content) return;
-    setPlaying(true);
-    setContent(message)
+    setContent(message);
+    console.log(message);
   }
 
+  const onEnd = () => {
+    setPlaying(false);
+    setContent("")
+  }
 
   return (
     <PageLayout>
       <StyledGramophone playing={playing} />
       <RecordsWrapper >
-        {Object.values(contents).map((content, index) => (
-          <Record key={index} title={content.title} onClick={() => handleClick(content.message)} />
+        {Object.values(contents).map(content => (
+          <Record key={content.title} title={content.title} onClick={() => handleClick(content.message)} />
         ))}
       </RecordsWrapper>
-      <StyledContent>
-        { content && <Typewriter
+      {content && <StyledContent>
+        <Typewriter
           options={{ cursor: "", delay: 4 }}
           onInit={(typewriter) => {
             typewriter
-              .typeString(content)
+              .pasteString(content,null)
               .start()
-              .callFunction(() => setPlaying(false))
+              .callFunction(onEnd)
           }}
         />
-}
       </StyledContent>
+      }
     </PageLayout>
   )
 }
