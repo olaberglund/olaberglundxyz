@@ -22,9 +22,10 @@ const Home = () => {
           <Record key={content.title} title={content.title} onClick={() => handleClick(content.message)} />
         ))}
       </RecordsWrapper>
-      <StyledContent>
-        <ContentWriter content={content} onEnd={() => setPlaying(false)} />
+      {content && <StyledContent>
+        <ContentWriter delay={1} string={content} onEnd={() => setPlaying(false) } />
       </StyledContent>
+      }
     </PageLayout>
   )
 }

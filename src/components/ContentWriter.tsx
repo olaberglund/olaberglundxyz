@@ -1,23 +1,30 @@
-import React from 'react'
-import Typewriter from "typewriter-effect";
-
+import React, { useEffect, useState } from 'react'
 
 type WriterProps = {
-  content: string
+  string: string
   onEnd: () => void
+  delay: number
 }
 
-function ContentWriter({ content, onEnd }: WriterProps ) {
+function ContentWriter({ string, onEnd, delay }: WriterProps ) {
+  const chars = Array.from(string);
+  const [content, setContent] = useState("")
+
+  useEffect(() => {
+    setContent("");
+    const timeouts: NodeJS.Timeout[] = [];
+    chars.forEach((char, index) => {
+      timeouts.push(setTimeout(() => setContent((curr) => curr+char), delay*20*index));
+
+    });
+    return () => {
+      timeouts.forEach(clearTimeout);
+      onEnd();
+    }
+  }, [string])
+
   return (
-        <Typewriter
-          options={{ cursor: "", delay: 4 }}
-          onInit={(typewriter) => {
-            typewriter
-              .typeString(content)
-              .start()
-              .callFunction(onEnd)
-          }}
-        />
+    <p>{content}</p>
   )
 }
 
