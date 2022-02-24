@@ -6,7 +6,7 @@ export const homeContent = {
 
 export const aktuelltContent = {
   title: "Aktuellt",
-  message: `Jag har nyligen fått jobb på Lunicore och ser fram emot det!`
+  message: `Jag har nyligen fått jobb på Weknowit och ser fram emot det!`
 }
 
 export const legacy = {
