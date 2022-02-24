@@ -3,7 +3,7 @@ import { RecordsWrapper, StyledGramophone, StyledContent } from './Home.styled'
 import { PageLayout } from './Home.styled'
 import Record from '../../components/Record/Record'
 import * as contents from './contents';
-import ContentWriter from '../../components/ContentWriter';
+import StringWriter from '../../components/StringWriter';
 
 const Home = () => {
   const [playing, setPlaying] = useState(false);
@@ -22,10 +22,9 @@ const Home = () => {
           <Record key={content.title} title={content.title} onClick={() => handleClick(content.message)} />
         ))}
       </RecordsWrapper>
-      {content && <StyledContent>
-        <ContentWriter delay={1} string={content} onEnd={() => setPlaying(false) } />
+      <StyledContent>
+        <StringWriter delay={1} string={content} onEnd={() => setPlaying(false) } />
       </StyledContent>
-      }
     </PageLayout>
   )
 }
