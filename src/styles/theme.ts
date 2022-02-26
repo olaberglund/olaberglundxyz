@@ -1,4 +1,6 @@
-export const theme = {
+import { DefaultTheme } from 'styled-components';
+
+const theme: DefaultTheme = {
   colors: {
     header: '#385154',
     body: '#1C1C1C',
@@ -7,3 +9,5 @@ export const theme = {
   padding: '10%',
   mobile: '768px'
 }
+
+export { theme };
