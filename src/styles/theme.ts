@@ -1,13 +1,17 @@
-import { DefaultTheme } from 'styled-components';
+export type ThemeType = typeof light;
 
-const theme: DefaultTheme = {
-  colors: {
-    header: '#385154',
-    body: '#1C1C1C',
-    searchButton: '#8CA3A6',
-  },
-  padding: '10%',
-  mobile: '768px'
+export const light = {
+  primary: "#FFF",
+  text: "#000",
+  background: "#111",
 }
 
-export { theme };
+export const dark: ThemeType = {
+  primary: '#8CA3A6',
+  //text: '#385154',
+  text: '#FFF',
+  background: '#1C1C1C',
+}
+
+const theme = dark;
+export default theme;
