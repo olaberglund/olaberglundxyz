@@ -1,14 +1,15 @@
 import styled from 'styled-components'
-import { Button } from '@mui/material'
 
 export const StyledContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
-  justify-content: flex-start;
   width: 100%;
   height: 50px;
 `
 
-export const StyledLink = styled(Button)`
-    color: ${({ theme }) => theme.text}
+export const StyledNav = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 `
