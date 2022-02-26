@@ -5,22 +5,16 @@ interface NavbarLinkProps {
   size: "normal" | "large"
 }
 
-export const StyledLink = styled(NavLink)<NavbarLinkProps>`
+export const StyledLink = styled(NavLink) <NavbarLinkProps>`
   text-decoration: none;
   color: ${({ theme }) => theme.text};
-  font-size: 1.6rem;
+  font-size: ${({size}) => size === "normal" ? "1.4rem" : "2.2rem"};
 
-  &.active {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 5px;
-    text-decoration-color: #AD7D62;
-  }
-
+  &.active::after, 
   :hover::after {
-    width: 100%;
+      width: 100%;
   }
-
+  
   &::after {
     content: '';
     width: 0px;
