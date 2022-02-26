@@ -5,16 +5,16 @@ import NavbarLink from './NavbarLink'
 function Navbar() {
 
   const links = [
-    { title: 'Home', href: '/' },
-    { title: 'Brev', href: '/brev' },
-    { title: 'Aktuellt', href: '/aktuellt' }
+    { title: 'Hem', href: '/', size: 'large' as 'large' },
+    { title: 'Brev', href: '/brev', size: 'normal' as 'normal' },
+    { title: 'Aktuellt', href: '/aktuellt', size: 'normal' as 'normal' }
   ]
 
   return (
     <StyledContainer>
       <StyledNav>
         {links.map(link => (
-          <NavbarLink size="normal" title={link.title} href={link.href} />
+          <NavbarLink key={link.title} size={link.size} title={link.title} href={link.href} />
         ))}
       </StyledNav>
     </StyledContainer>
