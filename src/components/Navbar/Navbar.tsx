@@ -1,7 +1,6 @@
-import { Button } from '@mui/material'
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { StyledContainer, StyledLink } from './Navbar.styled'
+import { StyledContainer, StyledNav } from './Navbar.styled'
+import NavbarLink from './NavbarLink'
 
 function Navbar() {
 
@@ -13,11 +12,11 @@ function Navbar() {
 
   return (
     <StyledContainer>
-      <nav>
-        { links.map(link => (
-          <Button component={Link} to={link.href} variant="outlined">{link.title}</Button>
+      <StyledNav>
+        {links.map(link => (
+          <NavbarLink size="normal" title={link.title} href={link.href} />
         ))}
-      </nav>
+      </StyledNav>
     </StyledContainer>
   )
 }
