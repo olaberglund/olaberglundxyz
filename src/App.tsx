@@ -5,20 +5,20 @@ import GlobalStyle from './styles/GlobalStyles';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home';
+import Brev from './pages/Brev/Brev';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
+        <Navbar />
         <Routes>
-          <Route path="/" element={<Navbar />}>
-            <Route index element={<Home />} />
-            <Route path="*" element={<div>Not Found!</div>} />
-          </Route>
+          <Route index element={<Home />} />
+          <Route path="brev" element={<Brev />} />
+          <Route path="*" element={<div>Not Found!</div>} />
         </Routes>
       </Router>
-
     </ThemeProvider>
   );
 }
