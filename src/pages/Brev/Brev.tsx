@@ -7,11 +7,11 @@ function Brev() {
   return (
     <Layout>
       <Sidebar>
-        <SidebarElement>
+        <SidebarElement to="alla">
           <FeedIcon />
           Se alla brev
         </SidebarElement>
-        <SidebarElement>
+        <SidebarElement to="nytt">
           <CreateIcon />
           Skriv nytt brev
         </SidebarElement>
