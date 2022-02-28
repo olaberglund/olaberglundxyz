@@ -1,22 +1,15 @@
 import React, { useEffect } from 'react'
 import { storage } from '../lib/firebase';
-import { ref, getDownloadURL } from 'firebase/storage'
+import { ref, listAll, list } from 'firebase/storage'
 
 function BrevDataTable() {
 
   useEffect(() => {
-    const lettersRef = ref(storage, 'Brev/Blodröd öppning väntas(1).docx');
-    getDownloadURL(lettersRef)
-      .then((url) => {
-        const xhr = new XMLHttpRequest();
-        console.log(url);
-        xhr.responseType = 'blob';
-        xhr.onload = (event) => {
-          const blob = xhr.response;
-        };
-        xhr.open('GET', url);
-        xhr.send();
-      })
+    (async () => {
+      const lettersRef = ref(storage, 'Brev');
+      const firstPage = await list(lettersRef, { maxResults: 10 });
+      firstPage.items.forEach((item) => console.log(item.name));
+    })();
   }, [])
 
   return (
