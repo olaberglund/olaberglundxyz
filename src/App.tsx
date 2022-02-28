@@ -17,7 +17,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route index element={<Home />} />
-            <Route path="brev" element={<Brev />} />
+            <Route path="brev/*" element={<Brev />} />
             <Route path="*" element={<div>Not Found!</div>} />
           </Routes>
         </FlexLayout>
