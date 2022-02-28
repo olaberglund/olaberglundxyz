@@ -17,7 +17,7 @@ function Brev() {
         </SidebarElement>
       </Sidebar>
       <button>yo</button>
-    </Layout >
+    </Layout>
   )
 }
 
