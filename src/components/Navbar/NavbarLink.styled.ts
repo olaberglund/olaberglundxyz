@@ -21,6 +21,6 @@ export const StyledLink = styled(NavLink) <NavbarLinkProps>`
     height: 1px;
     display: block;
     background: #AD7D62;
-    transition: 300ms;
+    transition: width 300ms;
   }
 `
