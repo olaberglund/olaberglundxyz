@@ -13,8 +13,6 @@ const GlobalStyle = createGlobalStyle`
   body, #root {
     height: 100%;
   }
-
-
 `
 
 export default GlobalStyle;
