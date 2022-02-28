@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const FlexLayout = styled.div`
-  display: 'flex';
+  display: flex;
   flex-direction: column; 
   height: 100%;
 `
