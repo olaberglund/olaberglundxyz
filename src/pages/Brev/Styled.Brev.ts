@@ -4,6 +4,9 @@ export const Layout = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
+  flex: 1;
+
 `
 
 export const SidebarElement = styled.div`
@@ -23,4 +26,6 @@ export const Sidebar = styled.div`
   border-bottom-right-radius: 10px;
   padding: 10px;
   gap: 16px;
+
+ 
 `
