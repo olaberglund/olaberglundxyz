@@ -40,7 +40,6 @@ export const Sidebar = styled.div`
   align-items: flex-start;
   flex-direction: column;
 
-
   & > :last-child {
     border-bottom-right-radius: 10px;
   }
