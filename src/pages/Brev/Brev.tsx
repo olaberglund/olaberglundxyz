@@ -1,10 +1,11 @@
 import React from 'react'
-import { SidebarElement, Layout, Sidebar } from './Styled.Brev'
 import FeedIcon from '@mui/icons-material/Feed';
 import CreateIcon from '@mui/icons-material/Create';
 import { QuestionMark } from '@mui/icons-material';
 import { Route, Routes } from 'react-router-dom';
 import BrevDataTable from '../../components/BrevDataTable';
+import { Sidebar, SidebarElement } from '../../components/Sidebar.styled';
+import { PageLayout } from '../../components/PageLayout.styled';
 
 function Brev() {
 
@@ -15,7 +16,7 @@ function Brev() {
   }
 
   return (
-    <Layout>
+    <PageLayout>
       <Sidebar>
         <SidebarElement to={links.alla}>
           <FeedIcon />
@@ -36,7 +37,7 @@ function Brev() {
         <Route path={links.nytt} element={<p>Nytt brev</p>} />
         <Route path={links.faq} element={<p>Faq</p>} />
       </Routes>
-    </Layout>
+    </PageLayout>
   )
 }
 

@@ -7,7 +7,8 @@ function Navbar() {
   const links = [
     { title: 'Hem', href: '/', size: 'large' as 'large' },
     { title: 'Brev', href: '/brev', size: 'normal' as 'normal' },
-    { title: 'Aktuellt', href: '/aktuellt', size: 'normal' as 'normal' }
+    { title: 'Aktuellt', href: '/aktuellt', size: 'normal' as 'normal' },
+    { title: 'Träning', href: '/traning', size: 'normal' as 'normal' }
   ]
 
   return (
