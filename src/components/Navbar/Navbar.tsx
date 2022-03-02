@@ -5,7 +5,7 @@ import { StyledContainer, StyledNav } from './Navbar.styled'
 import NavbarLink from './NavbarLink'
 
 function Navbar() {
-  const { name } = useContext(UserContext);
+  const { username } = useContext(UserContext);
 
   const links = [
     { title: 'Hem', href: '/', size: 'large' as 'large' },
@@ -21,7 +21,7 @@ function Navbar() {
           <NavbarLink key={link.title} size={link.size} title={link.title} href={link.href} />
         ))}
       </StyledNav>
-      { name && <UserStatusButton /> }
+      <UserStatusButton /> 
     </StyledContainer>
   )
 }
