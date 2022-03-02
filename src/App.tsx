@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 import GlobalStyle from './styles/GlobalStyles';
@@ -9,28 +9,17 @@ import Brev from './pages/Brev/Brev';
 import { FlexLayout } from './styles/App.styled';
 import Traning from './pages/Traning/Traning';
 import { UserContext } from './lib/firebase/context';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from './lib/firebase/firebase';
+import { useUserData } from './lib/hooks';
 
 function App() {
-  const [user] = useAuthState(auth)
-  const [name, setName] = useState(null);
-
-  useEffect(() => {
-    //realtime subscription
-    let unsubscribe; 
-
-    if(user) {
-    }
-  }, [user])
+  const username = useUserData();
 
   return (
-
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
         <FlexLayout>
-          <UserContext.Provider value={{name: "Jordan"}}>
+          <UserContext.Provider value={{ username: username}}>
             <Navbar />
             <Routes>
               <Route index element={<Home />} />
