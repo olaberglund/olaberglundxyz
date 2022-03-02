@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 interface userContextInterface {
-  name: string | null;
+  username: string | null,
 }
 
-export const UserContext = createContext<userContextInterface>({name: null});
+export const UserContext = createContext<userContextInterface>({username: null});
