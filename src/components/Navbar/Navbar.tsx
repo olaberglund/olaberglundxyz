@@ -1,9 +1,11 @@
-import React from 'react'
-import LoginButton from './LoginButton'
+import React, { useContext } from 'react'
+import { UserContext } from '../../lib/firebase/context'
+import UserStatusButton from './UserStatusButton'
 import { StyledContainer, StyledNav } from './Navbar.styled'
 import NavbarLink from './NavbarLink'
 
 function Navbar() {
+  const { name } = useContext(UserContext);
 
   const links = [
     { title: 'Hem', href: '/', size: 'large' as 'large' },
@@ -19,7 +21,7 @@ function Navbar() {
           <NavbarLink key={link.title} size={link.size} title={link.title} href={link.href} />
         ))}
       </StyledNav>
-      <LoginButton />
+      { name && <UserStatusButton /> }
     </StyledContainer>
   )
 }
