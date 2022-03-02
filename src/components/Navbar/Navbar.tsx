@@ -1,4 +1,5 @@
 import React from 'react'
+import LoginButton from './LoginButton'
 import { StyledContainer, StyledNav } from './Navbar.styled'
 import NavbarLink from './NavbarLink'
 
@@ -18,6 +19,7 @@ function Navbar() {
           <NavbarLink key={link.title} size={link.size} title={link.title} href={link.href} />
         ))}
       </StyledNav>
+      <LoginButton />
     </StyledContainer>
   )
 }
