@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
+import theme from '../../styles/theme'
 
 interface NavbarLinkProps {
   size: "normal" | "large"
@@ -8,7 +9,7 @@ interface NavbarLinkProps {
 export const StyledLink = styled(NavLink) <NavbarLinkProps>`
   text-decoration: none;
   color: ${({ theme }) => theme.text};
-  font-size: ${({size}) => size === "normal" ? "1.4rem" : "2.2rem"};
+  font-size: ${({size}) => size === "normal" ? theme.textSize.normal : theme.textSize.large };
 
   &.active::after, 
   :hover::after {
