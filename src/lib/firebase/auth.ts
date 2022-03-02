@@ -1,7 +1,7 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { provider } from "./firebase";
 
-export function signIn() {
+export const signInWithGoogle = async () => {
   const auth = getAuth();
   signInWithPopup(auth, provider)
     .then((result) => {
@@ -23,6 +23,6 @@ export function signIn() {
     });
 }
 
-export function signOut() {
+export const signOut = () => {
 
 }
