@@ -12,14 +12,14 @@ import { UserContext } from './lib/firebase/context';
 import { useUserData } from './lib/hooks';
 
 function App() {
-  const username = useUserData();
+  const [username, user, loading] = useUserData();
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
         <FlexLayout>
-          <UserContext.Provider value={{ username: username}}>
+          <UserContext.Provider value={{ user: user, username: username, loading: loading }}>
             <Navbar />
             <Routes>
               <Route index element={<Home />} />
