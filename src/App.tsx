@@ -21,24 +21,26 @@ function App() {
       <GlobalStyle />
       <Router>
         <FlexLayout>
-          <UserContext.Provider value={{ user: user, loading: loading }}>
-            <Navbar />
-            <Routes>
-              <Route index element={<Home />} />
-              <Route path="brev" element={<Brev />}>
-                <Route index element={<p>Välj något</p>} />
-                <Route path="alla" element={<BrevDataTable />} />
-                <Route path="nytt" element={<p>Nytt brev</p>} />
-                <Route path="faq" element={<p>Faq</p>} />
-              </Route>
-              <Route path="traning" element={<Traning />}>
-                <Route path="logga" element={<></>} />
-                <Route path="statistik" element={<p>Nytt brev</p>} />
-                <Route path="program" element={<CreateProgram />} />
-              </Route>
-              <Route path="*" element={<div>Not Found!</div>} />
-            </Routes>
-          </UserContext.Provider>
+          {!loading && (
+            <UserContext.Provider value={{ user: user, loading: loading }}>
+              <Navbar />
+              <Routes>
+                <Route index element={<Home />} />
+                <Route path="brev" element={<Brev />}>
+                  <Route index element={<p>Välj något</p>} />
+                  <Route path="alla" element={<BrevDataTable />} />
+                  <Route path="nytt" element={<p>Nytt brev</p>} />
+                  <Route path="faq" element={<p>Faq</p>} />
+                </Route>
+                <Route path="traning" element={<Traning />}>
+                  <Route path="logga" element={<></>} />
+                  <Route path="statistik" element={<p>Nytt brev</p>} />
+                  <Route path="program" element={<CreateProgram />} />
+                </Route>
+                <Route path="*" element={<div>Not Found!</div>} />
+              </Routes>
+            </UserContext.Provider>
+          )}
         </FlexLayout>
       </Router>
     </ThemeProvider>
