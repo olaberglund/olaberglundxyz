@@ -4,12 +4,14 @@ import { StyledLink } from './NavbarLink.styled'
 interface NavbarLinkProps {
   title: string,
   href: string,
+  disabled: boolean,
   size: "normal" | "large"
 }
 
-function NavbarLink({ title, href, size } : NavbarLinkProps) {
+function NavbarLink({ title, href, size, disabled } : NavbarLinkProps) {
+
   return (
-    <StyledLink size={size} to={href}>{title}</StyledLink>
+    <StyledLink onClick={(e) => disabled && e.preventDefault()} disabled={disabled} size={size} to={href}>{title}</StyledLink>
   )
 }
 

@@ -1,14 +1,20 @@
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
+import theme from '../../styles/theme'
 
 interface NavbarLinkProps {
-  size: "normal" | "large"
+  size: "normal" | "large",
+  disabled: boolean
 }
 
 export const StyledLink = styled(NavLink) <NavbarLinkProps>`
   text-decoration: none;
-  color: ${({ theme }) => theme.text};
-  font-size: ${({size}) => size === "normal" ? "1.4rem" : "2.2rem"};
+  color: ${({ theme, disabled }) => disabled ? '#949494' : theme.text};
+  font-size: ${({size}) => size === "normal" ? theme.textSize.normal : theme.textSize.large };
+  
+  :hover {
+    cursor: ${({ disabled }) => disabled ? 'default' : 'pointer'};
+  }
 
   &.active::after, 
   :hover::after {
@@ -20,7 +26,7 @@ export const StyledLink = styled(NavLink) <NavbarLinkProps>`
     width: 0px;
     height: 1px;
     display: block;
-    background: #AD7D62;
+    background: ${({disabled}) => disabled ? '#949494' : '#AD7D62'};
     transition: width 300ms;
   }
 `

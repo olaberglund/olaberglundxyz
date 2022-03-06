@@ -4,6 +4,7 @@ import { Sidebar, SidebarElement } from '../../components/Sidebar.styled'
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import { Outlet } from 'react-router-dom';
 
 function Traning() {
   return (
@@ -22,6 +23,7 @@ function Traning() {
           Program
         </SidebarElement>
       </Sidebar>
+      <Outlet />
     </PageLayout>
   )
 }

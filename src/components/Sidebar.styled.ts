@@ -6,6 +6,7 @@ export const Sidebar = styled.div`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
+  width: max-content;
 
   & > :last-child {
     border-bottom-right-radius: 10px;
@@ -32,8 +33,8 @@ export const SidebarElement = styled(Link)`
   text-decoration: none;
   background-color: ${({ theme }) => theme.primary};
   gap: 12px;
-  width: 100%;
   padding: 10px;
+  width: 100%;
   animation: 0.3s ease-out slideInFromLeft;
 
   :hover {
