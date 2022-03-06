@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import TextField from '@mui/material/TextField';
-import { listStyles } from './CreateProgram.styled';
-import { List, ListItemText, ListItemButton, SelectChangeEvent, ListSubheader } from '@mui/material';
+import { Layout, List, ListItem, } from './CreateProgram.styled';
+import { SelectChangeEvent } from '@mui/material';
 
 function CreateProgram() {
   const [exercise, setExercise] = useState('');
@@ -14,41 +14,32 @@ function CreateProgram() {
     'squat',
     'bench',
     'deadlift',
+    'overhead press',
+    'dumbbell press',
+    'incline dumbbell press',
+    'romanian deadlifts',
+    'deadlifts pause off floor',
+    'bicep curls',
+    'chins',
+    'pullups',
+    'dips',
+    'tricep pushdown',
+    'sumo deadlift',
+    'front squat',
+    'JM press',
+    'sled push'
   ]
 
   return (
-    <>
-      <List
-        sx={listStyles}
-        component="div"
-        subheader={
-          <ListSubheader sx={{ borderRadius: 3 }} component="div">
-            Lägg till övningar
-          </ListSubheader>
-        }
-      >
+    <Layout>
+      <List>
         {exercises.map(exercise => (
-          <ListItemButton key={exercise}>
-            <ListItemText primary={exercise} />
-          </ListItemButton>
+          <ListItem key={exercise}>
+            {exercise}
+          </ListItem>
         ))}
       </List>
-      <List
-        sx={listStyles}
-        component="div"
-        subheader={
-          <ListSubheader sx={{ borderRadius: 3 }} component="div">
-            Lägg till övningar
-          </ListSubheader>
-        }
-      >
-        {exercises.map(exercise => (
-          <ListItemButton key={exercise}>
-            <ListItemText primary={exercise} />
-          </ListItemButton>
-        ))}
-      </List>
-    </>
+    </Layout>
   )
 }
 
