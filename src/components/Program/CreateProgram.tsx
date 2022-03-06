@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import TextField from '@mui/material/TextField';
-import { Form } from './CreateProgram.styled';
-import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { listStyles } from './CreateProgram.styled';
+import { List, ListItemText, ListItemButton, SelectChangeEvent, ListSubheader } from '@mui/material';
 
 function CreateProgram() {
   const [exercise, setExercise] = useState('');
@@ -13,27 +13,42 @@ function CreateProgram() {
   const exercises = [
     'squat',
     'bench',
-    'deadlift'
+    'deadlift',
   ]
 
   return (
-    <Form>
-      <FormControl style={{ width: '100%' }}>
-        <InputLabel>Programmets namn</InputLabel>
-        <Input />
-      </FormControl>
-      <FormControl style={{ width: '100%' }}>
-        <Select
-          value={exercise}
-          label="Yooooo"
-          onChange={handleChange}
-        >
-          {exercises.map(exercise => (
-            <MenuItem key={exercise} value={exercise}>{exercise}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </Form>
+    <>
+      <List
+        sx={listStyles}
+        component="div"
+        subheader={
+          <ListSubheader sx={{ borderRadius: 3 }} component="div">
+            Lägg till övningar
+          </ListSubheader>
+        }
+      >
+        {exercises.map(exercise => (
+          <ListItemButton key={exercise}>
+            <ListItemText primary={exercise} />
+          </ListItemButton>
+        ))}
+      </List>
+      <List
+        sx={listStyles}
+        component="div"
+        subheader={
+          <ListSubheader sx={{ borderRadius: 3 }} component="div">
+            Lägg till övningar
+          </ListSubheader>
+        }
+      >
+        {exercises.map(exercise => (
+          <ListItemButton key={exercise}>
+            <ListItemText primary={exercise} />
+          </ListItemButton>
+        ))}
+      </List>
+    </>
   )
 }
 
