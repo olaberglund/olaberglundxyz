@@ -1,20 +1,12 @@
 import styled from "styled-components";
 
-export const listStyles = {
-  width: '40%',
-  bgcolor: 'background.paper',
-  color: '#000',
-  borderRadius: 3,
-  overflow: 'scroll',
-  maxHeight: '400px',
-};
-
 export const List = styled.ul`
+  position: absolute;
   background-color: #fff;
   list-style-type: none;
-  max-height: 60%;
+  height: 80%;
   border-radius: 10px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
@@ -23,8 +15,8 @@ export const List = styled.ul`
 export const ListItem = styled.li`
   color: #000;
   width: 100%;
-  padding: 10px;
   font-size: ${({theme}) => theme.textSize.small};
+  padding: 10px;
 
   :hover {
     background-color: #000;
