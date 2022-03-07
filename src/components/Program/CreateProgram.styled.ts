@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const List = styled.ul`
-  position: absolute;
   background-color: #fff;
+  position: absolute;
   list-style-type: none;
   height: 80%;
   border-radius: 10px;
@@ -27,5 +27,12 @@ export const Layout = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  height: 100%;
+`
+
+export const Center = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100%;
 `

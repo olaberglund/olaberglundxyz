@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import TextField from '@mui/material/TextField';
-import { Layout, List, ListItem, } from './CreateProgram.styled';
+import { Center, Layout, List, ListItem, } from './CreateProgram.styled';
 import { SelectChangeEvent } from '@mui/material';
 
 function CreateProgram() {
@@ -32,13 +32,24 @@ function CreateProgram() {
 
   return (
     <Layout>
-      <List>
-        {exercises.map(exercise => (
-          <ListItem key={exercise}>
-            {exercise}
-          </ListItem>
-        ))}
-      </List>
+      <Center>
+        <List>
+          {exercises.map(exercise => (
+            <ListItem key={exercise}>
+              {exercise}
+            </ListItem>
+          ))}
+        </List>
+      </Center>
+      <Center>
+        <List>
+          {exercises.map(exercise => (
+            <ListItem key={exercise}>
+              {exercise}
+            </ListItem>
+          ))}
+        </List>
+      </Center>
     </Layout>
   )
 }
