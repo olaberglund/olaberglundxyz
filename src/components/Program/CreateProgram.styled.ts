@@ -12,7 +12,7 @@ export const listStyles = {
 export const List = styled.ul`
   background-color: #fff;
   list-style-type: none;
-  max-height: 400px;
+  max-height: 60%;
   border-radius: 10px;
   overflow-y: scroll;
   overflow-x: hidden;
