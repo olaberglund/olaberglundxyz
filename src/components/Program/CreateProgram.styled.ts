@@ -4,7 +4,7 @@ export const List = styled.ul`
   background-color: #fff;
   position: absolute;
   list-style-type: none;
-  height: 80%;
+  max-height: 80%;
   border-radius: 10px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -19,7 +19,8 @@ export const ListItem = styled.li`
   padding: 10px;
 
   :hover {
-    background-color: #000;
+    background-color: #ebecf0;
+    cursor: pointer;
   }
 `
 
