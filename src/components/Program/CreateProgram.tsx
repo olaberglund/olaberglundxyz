@@ -26,9 +26,9 @@ function CreateProgram() {
     'tricep pushdown',
     'sumo deadlift',
     'front squat',
-    'JM press',
+    'jm press',
     'sled push'
-  ]
+  ].sort();
 
   return (
     <Layout>
