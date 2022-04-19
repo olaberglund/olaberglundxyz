@@ -5,6 +5,10 @@ const commons = {
     large: "2.2rem",
     normal: "1.4rem",
     small: "1.0rem",
+  },
+  quaternary: "#AD7D62",
+  hover: {
+    quaternary: '#ba937d',
   }
 }
 

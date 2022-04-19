@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Programming from '../../components/Programming'
+import Programming from '../../components/Programming';
 
 const Program = () => {
 
