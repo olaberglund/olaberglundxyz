@@ -6,7 +6,7 @@ export const Sidebar = styled.div`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  width: max-content;
+  margin-right: 20px;
 
   & > :last-child {
     border-bottom-right-radius: 10px;

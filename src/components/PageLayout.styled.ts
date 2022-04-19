@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const PageLayout = styled.div`
-  display: grid;
-  align-items: center;
-  grid-template-columns: auto 1fr;
+  display: flex;
+  justify-content: space-between;
   flex: 1;
 `
