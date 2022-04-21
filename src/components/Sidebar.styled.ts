@@ -29,15 +29,15 @@ export const SidebarElement = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.text.light};
   text-decoration: none;
-  background-color: ${({ theme }) => theme.primary};
+  background-color: ${({ theme }) => theme.color.primary};
   gap: 12px;
   padding: 10px;
   width: 100%;
   animation: 0.3s ease-out slideInFromLeft;
 
   :hover {
-    background-color: ${({ theme }) => theme.tertiary};
+    background-color: ${({ theme }) => theme.color.tertiary};
   }
 `

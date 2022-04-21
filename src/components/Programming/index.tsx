@@ -61,16 +61,16 @@ const Wrapper = styled.div`
 `;
 
 const SaveButton = styled.button`
-  color: ${({ theme }) => theme.text};
-  font-size: ${({ theme }) => theme.textSize.small};
+  color: ${({ theme }) => theme.text.light};
+  font-size: ${({ theme }) => theme.text.size.small};
   border-radius: 20px;
   border: none;
   padding: 8px 20px 8px 20px;
-  background-color: ${({ theme }) => theme.quaternary};
+  background-color: ${({ theme }) => theme.color.quaternary};
 
   :hover {
     cursor: pointer;
-    background-color: ${({ theme }) => theme.hover.quaternary};
+    background-color: ${({ theme }) => theme.color.quaternary};
   }
 `;
 

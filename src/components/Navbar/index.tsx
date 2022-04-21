@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../../lib/firebase/context'
 import UserStatusButton from './UserStatusButton'
-import { StyledContainer, StyledNav } from './Navbar.styled'
 import NavbarLink from './NavbarLink'
+import { GridContainer, Nav } from './styled';
 
 function Navbar() {
   const { user } = useContext(UserContext);
@@ -21,14 +21,14 @@ function Navbar() {
   ]
 
   return (
-    <StyledContainer>
-      <StyledNav>
+    <GridContainer>
+      <Nav>
         {links.map(link => (
           <NavbarLink disabled={link.disabled} key={link.title} size={link.size} title={link.title} href={link.href} />
         ))}
-      </StyledNav>
+      </Nav>
       <UserStatusButton />
-    </StyledContainer>
+    </GridContainer>
   )
 }
 

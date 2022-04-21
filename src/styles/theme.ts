@@ -1,34 +1,60 @@
-export type ThemeType = typeof light;
+import { DefaultTheme } from 'styled-components';
 
-const commons = {
-  textSize: {
-    large: "2.2rem",
-    normal: "1.4rem",
-    small: "1.0rem",
-  },
-  quaternary: "#AD7D62",
-  hover: {
-    quaternary: '#ba937d',
+
+declare module 'styled-components' {
+  export interface DefaultTheme {
+    background: string;
+    text: Text;
+    color: Color;
+    breakpoints: Breakpoints;
   }
 }
 
-export const light = {
-  ...commons,
-  primary: "#FFF",
-  secondary: "#FFF",
-  tertiary: "#FFF",
-  text: "#000",
-  background: "#111",
-}
+type Text = {
+  dark: string;
+  light: string;
+  size: {
+    large: string;
+    medium: string;
+    small: string;
+  }
+};
+type Color = {
+  primary: string;
+  secondary: string;
+  tertiary: string;
+  quaternary: string;
+};
+type Breakpoints = {
+  xl: string;
+  large: string;
+  medium: string;
+  small: string;
+};
 
-export const dark: ThemeType = {
-  ...commons,
-  primary: '#385154',
-  secondary: '#8CA3A6',
-  tertiary: "#304042",
-  text: '#FFF',
+const theme: DefaultTheme = {
   background: '#1C1C1C',
-}
+  text: {
+    dark: '#000',
+    light: '#fff',
+    size: {
+      large: "2.2rem",
+      medium: "1.4rem",
+      small: "1.0rem",
+    }
+  },
+  color: {
+    primary: '#385154',
+    secondary: '#8CA3A6',
+    tertiary: "#304042",
+    quaternary: "#AD7D62",
+  },
+  breakpoints: {
+    xl: '1200px',
+    large: '1000px',
+    medium: '580px',
+    small: '360px',
+  },
+};
 
-const theme = dark;
 export default theme;

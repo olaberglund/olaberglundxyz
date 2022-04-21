@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import { signInWithGoogle, signOutUser } from '../../lib/firebase/auth'
 import { UserContext } from '../../lib/firebase/context'
-import { StyledLoginButton, StyledLogoutButton } from './LoginButton.styled'
+import { LogoutButton, StyledLoginButton } from './styled';
 
 function UserStatusButton() {
   const { user } = useContext(UserContext);
 
   return (
     user ?
-      <StyledLogoutButton onClick={signOutUser}>Logga ut {user.displayName}</StyledLogoutButton>
+      <LogoutButton onClick={signOutUser}>Logga ut {user.displayName}</LogoutButton>
       :
       <StyledLoginButton onClick={signInWithGoogle}>Logga in</StyledLoginButton>
   )

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   background-color: #fff;
   display: flex;
-  color: #000;
+  color: ${({ theme }) => theme.text.dark};
   flex: 1;
   /* 
     Below is a surprising css trick 
@@ -23,9 +23,9 @@ export const List = styled.ul`
 `;
 
 export const ListItem = styled.li`
-  color: #000;
+  color: ${({ theme }) => theme.text.dark};
   width: 100%;
-  font-size: ${({ theme }) => theme.textSize.small};
+  font-size: ${({ theme }) => theme.text.size.small};
   padding: 10px;
 
   :hover {
@@ -58,12 +58,12 @@ export const Flex = styled.div`
 `;
 
 export const Program = styled.ul`
+  color: ${({ theme }) => theme.text.dark};
   list-style-type: none;
   scrollbar-gutter: stable;
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 100%;
-  color: #000;
   padding: 0;
   margin: 0;
 `;
@@ -81,7 +81,7 @@ export const Paper = styled.div`
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  color: #000;
+  color: ${({ theme }) => theme.text.dark};
   width: 100%;
   height: 100%;
 `;
@@ -130,7 +130,7 @@ export const RemoveButton = styled.button`
 export const TabWindow = styled.div`
   display: flex;
   flex-direction: column;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.text.light};
   height: 100%;
 `;
 
@@ -152,9 +152,9 @@ export const WindowTab = styled.li<TabProps>`
   place-content: center;
   padding: 10px;
   max-height: max-content;
-  background-color: ${(p) => p.active ? p.theme.tertiary : p.theme.primary};
+  background-color: ${(p) => p.active ? p.theme.color.tertiary : p.theme.color.primary};
   :hover {
-    background-color: ${({ theme }) => theme.tertiary};
+    background-color: ${({ theme }) => theme.color.tertiary};
     cursor: pointer;
   }
 `;
