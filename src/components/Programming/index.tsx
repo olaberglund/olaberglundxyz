@@ -23,7 +23,7 @@ const Programming: React.FC = () => {
       <Border radius={10}>
         <Tabber tabs={tabs} />
       </Border>
-      <SaveButton type="button">Spara</SaveButton>
+      <SaveButton type="button">Vidare</SaveButton>
     </Wrapper>
   )
 }
