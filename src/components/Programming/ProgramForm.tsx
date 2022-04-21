@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Exercise, Flex, List, ListItem, Program, SchemeInput } from "./styled";
-import { TabWindow, WindowTab } from "./Tabber";
+import { ExerciseScheme } from "../../lib/firebase/schemas/programs";
+import { Container, Exercise, Flex, List, ListItem, Program, ProgramWindow, RemoveButton, SchemeInput, Tabs, Title, TitleWrapper, WindowTab } from "./styled";
 
 const ProgramForm: React.FC = () => {
-  const [currentTab, setCurrentTab] = useState(0);
-  const handleClick = (index: number) => () => setCurrentTab(index);
-  const [chosen, setChosen] = useState<string[][]>([[], [], []]);
+  const DAYS = 3;
+  const [currentDay, setCurrentDay] = useState(0);
+  const handleClick = (index: number) => () => setCurrentDay(index);
+  const [chosen, setChosen] = useState<Record<number, ExerciseScheme[]>>({});
+
   // mock
   const exercises = [
     "squat",
@@ -29,55 +31,101 @@ const ProgramForm: React.FC = () => {
   ].sort();
 
   const handleAddClick = (exercise: string) => () => {
-    if (chosen[currentTab].includes(exercise)) return;
-    const changed = chosen.slice(0);
-    changed[currentTab].push(exercise);
-    setChosen(changed);
-  };
+    let scheme: ExerciseScheme = { exercise: exercise, reps: '', sets: '', kg: '', rpe: '' }
+    if (chosen[currentDay]) {
+      // clicked is already on list? Return.
+      if (chosen[currentDay].some(scheme => scheme.exercise === exercise)) return;
 
-  const handleDeleteClick = (exercise: string) => {
-    const index = chosen[currentTab].indexOf(exercise);
-    if (index !== -1) {
-      const filtered = chosen[currentTab].filter((e, i) => i !== index);
-      const changed = chosen.slice(0);
-      changed[currentTab] = filtered;
-      setChosen(changed);
+      const changed = chosen[currentDay].slice(0);
+      changed.push(scheme);
+      setChosen({
+        ...chosen,
+        [currentDay]: changed
+      });
+    } else {
+      setChosen({
+        ...chosen,
+        [currentDay]: [scheme]
+      });
     }
   };
 
-  const tabs = [
-    {
-      title: "Dag 1",
-      content: chosen[0],
-    },
-    {
-      title: "Dag 2",
-      content: chosen[1],
-    },
-    {
-      title: "Dag 3",
-      content: chosen[2],
-    },
-  ];
+  const handleDeleteClick = (exercise: string) => {
+    if (!chosen) return;
+
+    const index = chosen[currentDay].findIndex(s => s.exercise === exercise);
+    if (index !== -1) {
+      const changed = chosen[currentDay].filter((e, i) => i !== index);
+      setChosen({
+        ...chosen,
+        [currentDay]: changed
+      });
+    }
+  };
+
+  const setSets = (event: React.ChangeEvent<HTMLInputElement>, exercise: string) => {
+    const index = chosen[currentDay].findIndex(s => s.exercise === exercise);
+    const changed = chosen[currentDay].slice(0);
+    changed[index].sets = event.currentTarget.value;
+
+    setChosen({
+      ...chosen,
+      [currentDay]: changed
+    })
+  };
+
+  const setReps = (event: React.ChangeEvent<HTMLInputElement>, exercise: string) => {
+    const index = chosen[currentDay].findIndex(s => s.exercise === exercise);
+    const changed = chosen[currentDay].slice(0);
+    changed[index].reps = event.currentTarget.value;
+
+    setChosen({
+      ...chosen,
+      [currentDay]: changed
+    })
+  };
+
+  const setKgs = (event: React.ChangeEvent<HTMLInputElement>, exercise: string) => {
+    const index = chosen[currentDay].findIndex(s => s.exercise === exercise);
+    const changed = chosen[currentDay].slice(0);
+    changed[index].kg = event.currentTarget.value;
+
+    setChosen({
+      ...chosen,
+      [currentDay]: changed
+    })
+  };
+
+  const tabs = [...Array(DAYS).keys()].map(i => ({ title: `Dag ${i + 1}`, content: chosen[i + 1] }));
 
   return (
     <Container>
       <ProgramWindow>
         <Tabs>
           {tabs.map((tab, index) => (
-            <DayTab onClick={handleClick(index)}>{tab.title}</DayTab>
+            <WindowTab key={tab.title} active={currentDay === index} onClick={handleClick(index)}>{tab.title}</WindowTab>
           ))}
         </Tabs>
         <Program>
-          {chosen[currentTab].map((e) => (
-            <Exercise>
+          {chosen[currentDay]?.map((e) => (
+            <Exercise key={e.exercise}>
               <Flex>
-                <span>{e}</span>
-                <Scheme>Sets: </Scheme>
-                <Scheme>Reps: </Scheme>
-                <button type="button" onClick={() => handleDeleteClick(e)}>
-                  X
-                </button>
+                <TitleWrapper>
+                  <Title>{e.exercise}</Title>
+                  <RemoveButton type="button" onClick={() => handleDeleteClick(e.exercise)} />
+                </TitleWrapper>
+                <SchemeWrapper>
+                  <SchemeRubric>Sets: </SchemeRubric>
+                  <SchemeInput type="text" value={e.sets} onChange={(event) => setSets(event, e.exercise)} />
+                </SchemeWrapper>
+                <SchemeWrapper>
+                  <SchemeRubric>Reps: </SchemeRubric>
+                  <SchemeInput type="text" value={e.reps} onChange={(event) => setReps(event, e.exercise)} />
+                </SchemeWrapper>
+                <SchemeWrapper>
+                  <SchemeRubric>Vikt: </SchemeRubric>
+                  <SchemeInput type="text" value={e.kg} onChange={(event) => setKgs(event, e.exercise)} />
+                </SchemeWrapper>
               </Flex>
               <hr />
             </Exercise>
@@ -95,46 +143,14 @@ const ProgramForm: React.FC = () => {
   );
 };
 
-const Container = styled.div`
-  background-color: #fff;
+const SchemeWrapper = styled.div`
   display: flex;
-  color: #000;
-  width: 100%;
-  height: 500px;
-`;
-const ProgramWindow = styled(TabWindow)`
-  display: flex;
-  flex-direction: column;
-  color: ${({ theme }) => theme.text};
-  width: 100%;
-  flex: 3;
-`;
+  gap: 10px;
+`
 
-const Tabs = styled.ul`
-  list-style-type: none;
-  display: flex;
-  margin: 0;
-  padding: 0;
+const SchemeRubric = styled.span`
+  text-align: right; 
+  white-space: nowrap;
 `;
-
-const DayTab = styled(WindowTab)`
-  display: flex;
-  place-content: center;
-  padding: 10px;
-  background-color: ${({ theme }) => theme.primary};
-  :hover {
-    background-color: ${({ theme }) => theme.tertiary};
-    cursor: pointer;
-  }
-`;
-
-const Scheme: React.FC = ({ children }) => {
-  return (
-    <div>
-      <span>{children}</span>
-      <SchemeInput />
-    </div>
-  );
-};
 
 export default ProgramForm;

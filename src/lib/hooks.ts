@@ -5,7 +5,7 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { User } from 'firebase/auth';
 
 
-export const useUserData = (): [ User | null | undefined, boolean] => {
+export const useUserData = (): [User | null | undefined, boolean] => {
   const [user, loading, error] = useAuthState(auth)
   const [username, setUsername] = useState<string | null>(null);
 
@@ -34,7 +34,7 @@ export const useUserData = (): [ User | null | undefined, boolean] => {
 
 
     return unsubscribe;
-  }, [user]);
+  }, [loading, user]);
 
-  return [ user, loading];
+  return [user, loading];
 }

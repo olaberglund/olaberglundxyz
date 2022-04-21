@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Paper } from "./styled";
+import { Paper, Tabs, TabWindow, WindowTab } from "./styled";
 import { Tab } from "./types";
 
 type Props = {
@@ -15,38 +15,22 @@ const Tabber: React.FC<Props> = ({ tabs }) => {
     <TabWindow>
       <Tabs>
         {tabs.map((tab, index) => (
-          <WindowTab key={tab.title} onClick={handleClick(index)}>
+          <WindowTab active={currentTab === index} key={tab.title} onClick={handleClick(index)}>
             {tab.title}
           </WindowTab>
         ))}
       </Tabs>
-      <Paper>{tabs[currentTab].content}</Paper>
+      <Line />
+      {tabs[currentTab].content}
     </TabWindow>
   );
 };
 
-export default Tabber;
-
-export const TabWindow = styled.div`
-  color: ${({ theme }) => theme.text};
-  width: 100%;
-`;
-
-export const Tabs = styled.ul`
-  list-style-type: none;
-  display: flex;
+const Line = styled.hr`
   margin: 0;
   padding: 0;
-`;
+  border: none;
+  border-bottom: 1px solid white;
+`
 
-export const WindowTab = styled.li`
-  flex: 1;
-  display: flex;
-  place-content: center;
-  padding: 10px;
-  background-color: ${({ theme }) => theme.primary};
-  :hover {
-    background-color: ${({ theme }) => theme.tertiary};
-    cursor: pointer;
-  }
-`;
+export default Tabber;
