@@ -34,8 +34,9 @@ interface BorderProps {
 
 const Border = styled.div<BorderProps>`
   width: 100%;
-  height: 70%;
   max-height: 700px;
+  height: 70%;
+  min-height: 0;
   border: 1px solid white;
   border-top-left-radius: ${(p) => `${p.radius}px`};
   border-top-right-radius: ${(p) => `${p.radius}px`};
@@ -53,9 +54,10 @@ const Border = styled.div<BorderProps>`
 const Wrapper = styled.div`
   width: 60%;
   height: 100%;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  place-content: center;
+  justify-content: center;
   align-items: center;
   gap: 20px;
 `;
