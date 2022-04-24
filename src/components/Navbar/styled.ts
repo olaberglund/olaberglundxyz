@@ -13,7 +13,6 @@ export const LoginButton = styled.button`
   border-width: 1px;
   padding: 0 12px 0 12px;
   height: 40px;
-  margin-right: 10px;
 
   :hover {
     cursor: pointer;
@@ -45,7 +44,8 @@ export const NavWrapper = styled.div<NavWrapperProps>`
   }
 
   @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
-    display: ${(p) => p.mobileActive && 'none'};
+    /* display: ${(p) => p.mobileActive && 'none'}; */
+    opacity: ${(p) => p.mobileActive ? '0' : '1'};
     background-color: ${({ theme }) => theme.color.primary};
     flex-direction: column;
     align-items: flex-start;
@@ -55,13 +55,15 @@ export const NavWrapper = styled.div<NavWrapperProps>`
     width: auto;
     border: 1px solid white;
     top: 100%;
+    z-index: 1;
+    transition: opacity 0.2s;
   }
 `;
 
 export const Nav = styled.nav`
   display: flex;
   align-items: center;
-  width: 100%;
+  padding: 4px 10px 4px 0;
 
   @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
     position: relative;
@@ -98,8 +100,8 @@ export const StyledLink = styled(NavLink) <NavbarLinkProps>`
     background: ${({ disabled }) => disabled ? '#949494' : '#AD7D62'};
     transition: width 300ms;
   }
-  @media(max-width: ${({theme}) => theme.breakpoints.medium}) {
-    font-size: ${({ theme }) => theme.text.size.medium };
+  @media(max-width: ${({ theme }) => theme.breakpoints.medium}) {
+    font-size: ${({ theme }) => theme.text.size.medium};
   }
 `
 export const NavLinks = styled.div`
@@ -107,7 +109,7 @@ export const NavLinks = styled.div`
   align-items: center;
   flex: 1;
 
-  @media(max-width: ${({theme}) => theme.breakpoints.medium}) {
+  @media(max-width: ${({ theme }) => theme.breakpoints.medium}) {
     display: contents;
   }
 `;
@@ -115,17 +117,17 @@ export const NavLinks = styled.div`
 export const NavBurger = styled.button`
   display: none;
 
-  @media(max-width: ${({theme}) => theme.breakpoints.medium}) {
+  @media(max-width: ${({ theme }) => theme.breakpoints.medium}) {
     display: block;
     justify-self: end;
-    border-color: ${({ theme }) => theme.text};
-    background-color: transparent;
+    border-color: ${({ theme }) => theme.text.light};
     color: ${({ theme }) => theme.text.light};
     font-size: ${({ theme }) => theme.text.size.small};
     border-style: solid;
     border-radius: 10px;
     border-width: 1px;
     padding: 12px;
-    margin-right: 10px;
+    background-color: ${({ theme }) => theme.color.quaternary};
+    z-index: 1;
   }
 `;

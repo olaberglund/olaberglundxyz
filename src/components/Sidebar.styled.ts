@@ -16,7 +16,19 @@ export const Sidebar = styled.div`
     border-top-right-radius: 10px;
   }
   @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
-    display: none;
+    flex-direction: row;
+    & > :last-child {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 0px;
+    }
+
+    & > :first-child {
+      border-top-right-radius: 0px;
+      border-top-left-radius: 10px;
+    }
+
+    width: 100%;
+    margin-right: 0px;
   }
 `
 export const SidebarElement = styled(Link)`
@@ -26,6 +38,15 @@ export const SidebarElement = styled(Link)`
     }
     to {
       transform: translateX(0);
+    }
+  }
+
+  @keyframes slideUpFromBottom {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
     }
   }
 
@@ -42,5 +63,9 @@ export const SidebarElement = styled(Link)`
 
   :hover {
     background-color: ${({ theme }) => theme.color.tertiary};
+  }
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
+    animation: 0.3s ease-out slideUpFromBottom;
   }
 `

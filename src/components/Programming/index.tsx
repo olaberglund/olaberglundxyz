@@ -20,10 +20,12 @@ const Programming: React.FC = () => {
 
   return (
     <Wrapper>
-      <Border radius={10}>
-        <Tabber tabs={tabs} />
-      </Border>
-      <SaveButton type="button">Vidare</SaveButton>
+      <MobileWrapper>
+        <Border radius={10}>
+          <Tabber tabs={tabs} />
+        </Border>
+        <SaveButton type="button">Vidare</SaveButton>
+      </MobileWrapper>
     </Wrapper>
   )
 }
@@ -31,6 +33,21 @@ const Programming: React.FC = () => {
 interface BorderProps {
   radius: number;
 }
+
+const MobileWrapper = styled.div`
+  display: contents;
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.medium}) {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+  }
+`
 
 const Border = styled.div<BorderProps>`
   width: 100%;
@@ -50,7 +67,7 @@ const Border = styled.div<BorderProps>`
     }
   }
   @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
-    flex: 1;
+    height: 95%;
   }
 `
 
@@ -80,6 +97,12 @@ const SaveButton = styled.button`
   :hover {
     cursor: pointer;
     background-color: ${({ theme }) => theme.color.quaternary};
+  }
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.medium}) {
+    position: absolute;
+    bottom: 5%;
+    padding: 8px 30px 8px 30px;
   }
 `;
 

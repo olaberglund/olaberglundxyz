@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Programming from '../../components/Programming';
 
@@ -18,4 +18,16 @@ const Layout = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  min-height: 0;
+  animation: 0.3s ease-out 0s 1 fadeIn;
+
+  @keyframes fadeIn {
+      0% {
+          opacity: 0;
+      }
+      100% {
+          opacity: 1;
+      }
+  }
+
 `

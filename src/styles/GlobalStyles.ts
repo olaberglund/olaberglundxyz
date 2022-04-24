@@ -6,9 +6,14 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.text.light};
   }
 
-  body, #root, html {
+  #root {
     height: 100vh;
   }
+
+  body, html {
+    height: 100%;
+  }
+  
 `
 
 export default GlobalStyle;

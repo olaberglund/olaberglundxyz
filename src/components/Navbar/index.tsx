@@ -39,9 +39,14 @@ function Navbar() {
 }
 
 const Line = styled.div`
-  width: 100%;
-  border-top: 1px solid white;
-  margin-top: 5px
+  display: none;  
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
+    display: block;
+    width: 100%;
+    border-top: 1px solid white;
+    margin-top: 5px;
+  }
 `;
 
 export default Navbar
