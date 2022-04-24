@@ -35,7 +35,7 @@ interface BorderProps {
 const Border = styled.div<BorderProps>`
   width: 100%;
   max-height: 700px;
-  height: 70%;
+  height: 80%;
   min-height: 0;
   border: 1px solid white;
   border-top-left-radius: ${(p) => `${p.radius}px`};
@@ -49,6 +49,9 @@ const Border = styled.div<BorderProps>`
       border-top-right-radius: ${(p) => `${p.radius}px`};
     }
   }
+  @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
+    flex: 1;
+  }
 `
 
 const Wrapper = styled.div`
@@ -60,6 +63,10 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
+    width: 90%;
+  }
 `;
 
 const SaveButton = styled.button`

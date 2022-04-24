@@ -1,11 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { UserContext } from '../../lib/firebase/context'
 import UserStatusButton from './UserStatusButton'
 import NavbarLink from './NavbarLink'
-import { GridContainer, Nav } from './styled';
+import { NavWrapper, Nav, NavLinks, NavBurger } from './styled';
+import styled from 'styled-components';
 
 function Navbar() {
   const { user } = useContext(UserContext);
+  const [active, setActive] = useState(false);
 
   type link = {
     title: string
@@ -21,15 +23,25 @@ function Navbar() {
   ]
 
   return (
-    <GridContainer>
-      <Nav>
-        {links.map(link => (
-          <NavbarLink disabled={link.disabled} key={link.title} size={link.size} title={link.title} href={link.href} />
-        ))}
-      </Nav>
-      <UserStatusButton />
-    </GridContainer>
+    <Nav>
+      <NavBurger onClick={() => setActive(!active)}>{active ? '=' : 'X'}</NavBurger>
+      <NavWrapper mobileActive={active}>
+        <NavLinks>
+          {links.map(link => (
+            <NavbarLink disabled={link.disabled} key={link.title} size={link.size} title={link.title} href={link.href} />
+          ))}
+        </NavLinks>
+        <Line />
+        <UserStatusButton />
+      </NavWrapper>
+    </Nav>
   )
 }
+
+const Line = styled.div`
+  width: 100%;
+  border-top: 1px solid white;
+  margin-top: 5px
+`;
 
 export default Navbar

@@ -15,6 +15,9 @@ export const Sidebar = styled.div`
   & > :first-child {
     border-top-right-radius: 10px;
   }
+  @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
+    display: none;
+  }
 `
 export const SidebarElement = styled(Link)`
   @keyframes slideInFromLeft {

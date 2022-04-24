@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NavLink } from 'react-router-dom'
 import theme from '../../styles/theme'
 
-export const StyledLoginButton = styled.button`
+export const LoginButton = styled.button`
   justify-self: end;
   border-color: ${({ theme }) => theme.text};
   background-color: transparent;
@@ -18,42 +18,56 @@ export const StyledLoginButton = styled.button`
   :hover {
     cursor: pointer;
   }
-`
 
-export const Desktop = styled.div`
-  display: contents;
+  @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
+    border: none;
+    margin: 0;
+  }
 `;
 
-export const LogoutButton = styled.button`
-  justify-self: end;
-  border-color: ${({ theme }) => theme.text};
-  background-color: transparent;
+export const LogoutButton = styled(LoginButton)`
   color: ${({ theme }) => theme.text.light};
   font-size: ${({ theme }) => theme.text.size.small};
-  border-style: solid;
-  border-radius: 20px;
-  border-width: 1px;
-  padding: 0 12px 0 12px;
-  height: 40px;
-  margin-right: 10px;
-
-  :hover {
-    cursor: pointer;
-  }
 `
 
-export const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: center;
+interface NavWrapperProps {
+  mobileActive: boolean;
+}
+
+export const NavWrapper = styled.div<NavWrapperProps>`
+  display: flex;
   width: 100%;
-  height: 50px;
-`
+  align-items: center;
+  justify-content: space-between;
+
+  hr {
+    display: none;
+  }
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
+    display: ${(p) => p.mobileActive && 'none'};
+    background-color: ${({ theme }) => theme.color.primary};
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 10px;
+    position: absolute;
+    padding: 5px;
+    width: auto;
+    border: 1px solid white;
+    top: 100%;
+  }
+`;
 
 export const Nav = styled.nav`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  width: 100%;
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
+    position: relative;
+    flex-direction: column;
+    align-items: flex-end;
+  }
 `
 
 interface NavbarLinkProps {
@@ -65,6 +79,7 @@ export const StyledLink = styled(NavLink) <NavbarLinkProps>`
   text-decoration: none;
   color: ${({ theme, disabled }) => disabled ? '#949494' : theme.text.light};
   font-size: ${({ size }) => size === "normal" ? theme.text.size.medium : theme.text.size.large};
+  margin-left: 5%;
   
   :hover {
     cursor: ${({ disabled }) => disabled ? 'default' : 'pointer'};
@@ -83,4 +98,34 @@ export const StyledLink = styled(NavLink) <NavbarLinkProps>`
     background: ${({ disabled }) => disabled ? '#949494' : '#AD7D62'};
     transition: width 300ms;
   }
+  @media(max-width: ${({theme}) => theme.breakpoints.medium}) {
+    font-size: ${({ theme }) => theme.text.size.medium };
+  }
 `
+export const NavLinks = styled.div`
+  display: flex;
+  align-items: center;
+  flex: 1;
+
+  @media(max-width: ${({theme}) => theme.breakpoints.medium}) {
+    display: contents;
+  }
+`;
+
+export const NavBurger = styled.button`
+  display: none;
+
+  @media(max-width: ${({theme}) => theme.breakpoints.medium}) {
+    display: block;
+    justify-self: end;
+    border-color: ${({ theme }) => theme.text};
+    background-color: transparent;
+    color: ${({ theme }) => theme.text.light};
+    font-size: ${({ theme }) => theme.text.size.small};
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 1px;
+    padding: 12px;
+    margin-right: 10px;
+  }
+`;
