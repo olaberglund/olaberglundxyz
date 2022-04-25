@@ -17,7 +17,7 @@ function Brev() {
         </SidebarElement>
         <SidebarElement to="nytt">
           <CreateIcon />
-          Skriv nytt brev
+          Skriv nytt
         </SidebarElement>
         <SidebarElement to="faq">
           <QuestionMark />
