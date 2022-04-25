@@ -44,8 +44,7 @@ export const NavWrapper = styled.div<NavWrapperProps>`
   }
 
   @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
-    /* display: ${(p) => p.mobileActive && 'none'}; */
-    opacity: ${(p) => p.mobileActive ? '0' : '1'};
+    display: ${(p) => p.mobileActive && 'none'};
     background-color: ${({ theme }) => theme.color.primary};
     flex-direction: column;
     align-items: flex-start;
@@ -56,7 +55,6 @@ export const NavWrapper = styled.div<NavWrapperProps>`
     border: 1px solid white;
     top: 100%;
     z-index: 1;
-    transition: opacity 0.2s;
   }
 `;
 

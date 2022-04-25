@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 function Navbar() {
   const { user } = useContext(UserContext);
-  const [active, setActive] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
   type link = {
     title: string
@@ -24,8 +24,8 @@ function Navbar() {
 
   return (
     <Nav>
-      <NavBurger onClick={() => setActive(!active)}>{active ? '=' : 'X'}</NavBurger>
-      <NavWrapper mobileActive={active}>
+      <NavBurger onClick={() => setDisabled(!disabled)}>{disabled ? '=' : 'X'}</NavBurger>
+      <NavWrapper mobileActive={disabled}>
         <NavLinks>
           {links.map(link => (
             <NavbarLink disabled={link.disabled} key={link.title} size={link.size} title={link.title} href={link.href} />

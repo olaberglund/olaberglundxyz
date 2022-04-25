@@ -7,7 +7,7 @@ const ProgramForm: React.FC = () => {
   const DAYS = 3;
   const [currentDay, setCurrentDay] = useState(0);
   const handleClick = (index: number) => () => setCurrentDay(index);
-  const [chosen, setChosen] = useState<Record<number, ExerciseScheme[]>>({});
+  const [chosen, setChosen] = useState<Record<number, string[]>>({});
 
   // mock
   const exercises = [
@@ -31,13 +31,12 @@ const ProgramForm: React.FC = () => {
   ].sort();
 
   const handleAddClick = (exercise: string) => () => {
-    let scheme: ExerciseScheme = { exercise: exercise, reps: '', sets: '', kg: '', rpe: '' }
     if (chosen[currentDay]) {
       // clicked is already on list? Return.
-      if (chosen[currentDay].some(scheme => scheme.exercise === exercise)) return;
+      if (chosen[currentDay].some(e => e === exercise)) return;
 
       const changed = chosen[currentDay].slice(0);
-      changed.push(scheme);
+      changed.push(exercise);
       setChosen({
         ...chosen,
         [currentDay]: changed
@@ -45,7 +44,7 @@ const ProgramForm: React.FC = () => {
     } else {
       setChosen({
         ...chosen,
-        [currentDay]: [scheme]
+        [currentDay]: [exercise]
       });
     }
   };
@@ -53,7 +52,7 @@ const ProgramForm: React.FC = () => {
   const handleDeleteClick = (exercise: string) => {
     if (!chosen) return;
 
-    const index = chosen[currentDay].findIndex(s => s.exercise === exercise);
+    const index = chosen[currentDay].findIndex(s => s === exercise);
     if (index !== -1) {
       const changed = chosen[currentDay].filter((e, i) => i !== index);
       setChosen({
@@ -62,6 +61,57 @@ const ProgramForm: React.FC = () => {
       });
     }
   };
+
+  const tabs = [...Array(DAYS).keys()].map(i => ({ title: `Dag ${i + 1}`, content: chosen[i + 1] }));
+
+  return (
+    <Container>
+      <ProgramWindow>
+        <Tabs>
+          {tabs.map((tab, index) => (
+            <WindowTab key={tab.title} active={currentDay === index} onClick={handleClick(index)}>{tab.title}</WindowTab>
+          ))}
+        </Tabs>
+        <Program>
+          {chosen[currentDay]?.map((exercise, index) => (
+            <Exercise key={exercise}>
+              <Flex>
+                <TitleWrapper>
+                  <Title>{`${index + 1}. ${exercise}`}</Title>
+                  <RemoveButton type="button" onClick={() => handleDeleteClick(exercise)} />
+                </TitleWrapper>
+              </Flex>
+              <hr />
+            </Exercise>
+          ))}
+        </Program>
+      </ProgramWindow>
+      <List>
+        {exercises.map((exercise) => (
+          <ListItem key={exercise} onClick={handleAddClick(exercise)}>
+            {exercise}
+          </ListItem>
+        ))}
+      </List>
+    </Container>
+  );
+};
+
+const SchemeWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+`
+
+const SchemeRubric = styled.span`
+  text-align: right; 
+  white-space: nowrap;
+`;
+
+export default ProgramForm;
+
+/*
+
+  let scheme: ExerciseScheme = { exercise: exercise, reps: '', sets: '', kg: '', rpe: '' }
 
   const setSets = (event: React.ChangeEvent<HTMLInputElement>, exercise: string) => {
     const index = chosen[currentDay].findIndex(s => s.exercise === exercise);
@@ -96,61 +146,4 @@ const ProgramForm: React.FC = () => {
     })
   };
 
-  const tabs = [...Array(DAYS).keys()].map(i => ({ title: `Dag ${i + 1}`, content: chosen[i + 1] }));
-
-  return (
-    <Container>
-      <ProgramWindow>
-        <Tabs>
-          {tabs.map((tab, index) => (
-            <WindowTab key={tab.title} active={currentDay === index} onClick={handleClick(index)}>{tab.title}</WindowTab>
-          ))}
-        </Tabs>
-        <Program>
-          {chosen[currentDay]?.map((e) => (
-            <Exercise key={e.exercise}>
-              <Flex>
-                <TitleWrapper>
-                  <Title>{e.exercise}</Title>
-                  <RemoveButton type="button" onClick={() => handleDeleteClick(e.exercise)} />
-                </TitleWrapper>
-                <SchemeWrapper>
-                  <SchemeRubric>Sets: </SchemeRubric>
-                  <SchemeInput type="text" value={e.sets} onChange={(event) => setSets(event, e.exercise)} />
-                </SchemeWrapper>
-                <SchemeWrapper>
-                  <SchemeRubric>Reps: </SchemeRubric>
-                  <SchemeInput type="text" value={e.reps} onChange={(event) => setReps(event, e.exercise)} />
-                </SchemeWrapper>
-                <SchemeWrapper>
-                  <SchemeRubric>Vikt: </SchemeRubric>
-                  <SchemeInput type="text" value={e.kg} onChange={(event) => setKgs(event, e.exercise)} />
-                </SchemeWrapper>
-              </Flex>
-              <hr />
-            </Exercise>
-          ))}
-        </Program>
-      </ProgramWindow>
-      <List>
-        {exercises.map((exercise) => (
-          <ListItem key={exercise} onClick={handleAddClick(exercise)}>
-            {exercise}
-          </ListItem>
-        ))}
-      </List>
-    </Container>
-  );
-};
-
-const SchemeWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-`
-
-const SchemeRubric = styled.span`
-  text-align: right; 
-  white-space: nowrap;
-`;
-
-export default ProgramForm;
+  */
