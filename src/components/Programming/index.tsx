@@ -1,30 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProgramForm from './ProgramForm';
-import Tabber from './Tabber';
-import { Tab } from './types';
+import ProgramsTabber from './ProgramsTabber';
 
 const Programming: React.FC = () => {
-
-  const tabs: Tab[] = [
-    {
-      title: "Nytt",
-      content: <ProgramForm />,
-    },
-    {
-      title: "Översikt",
-      content: <p>En översikt</p>,
-    }
-  ]
-
 
   return (
     <Wrapper>
       <MobileWrapper>
         <Border radius={10}>
-          <Tabber tabs={tabs} />
+          <ProgramsTabber><SaveButton type="button">Vidare</SaveButton></ProgramsTabber>
         </Border>
-        <SaveButton type="button">Vidare</SaveButton>
       </MobileWrapper>
     </Wrapper>
   )
@@ -87,22 +72,20 @@ const Wrapper = styled.div`
 `;
 
 const SaveButton = styled.button`
+  position: absolute;
   color: ${({ theme }) => theme.text.light};
   font-size: ${({ theme }) => theme.text.size.small};
   border-radius: 20px;
   border: none;
   padding: 8px 20px 8px 20px;
   background-color: ${({ theme }) => theme.color.quaternary};
+  bottom: 1%;
+  left: 50%;
+  transform: translateX(-50%);
 
   :hover {
     cursor: pointer;
     background-color: ${({ theme }) => theme.color.quaternary};
-  }
-
-  @media(max-width: ${({ theme }) => theme.breakpoints.medium}) {
-    position: absolute;
-    bottom: 5%;
-    padding: 8px 30px 8px 30px;
   }
 `;
 

@@ -129,6 +129,7 @@ export const RemoveButton = styled.button`
 `
 export const TabWindow = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   color: ${({ theme }) => theme.text.light};
   height: 100%;
