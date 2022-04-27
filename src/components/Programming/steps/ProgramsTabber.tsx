@@ -1,7 +1,7 @@
 import React from 'react';
-import ProgramForm from './ProgramForm';
-import Tabber from './Tabber';
-import { Tab } from './types';
+import ExerciseForm from './ExerciseForm';
+import Tabber from '../Tabber';
+import { Tab } from '../types';
 
 
 const ProgramsTabber: React.FC = ({ children }) => {
@@ -9,7 +9,7 @@ const ProgramsTabber: React.FC = ({ children }) => {
   const tabs: Tab[] = [
     {
       title: "Nytt",
-      content: <><ProgramForm />{children}</>,
+      content: <><ExerciseForm />{children}</>,
     },
     {
       title: "Översikt",

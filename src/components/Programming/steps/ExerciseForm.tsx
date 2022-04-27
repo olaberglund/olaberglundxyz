@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { ExerciseScheme } from "../../lib/firebase/schemas/programs";
-import { Container, Exercise, Flex, List, ListItem, Program, ProgramWindow, RemoveButton, SchemeInput, Tabs, Title, TitleWrapper, WindowTab } from "./styled";
+import { Container, Exercise, Flex, List, ListItem, Program, ProgramWindow, RemoveButton, Tabs, Title, TitleWrapper, WindowTab } from "../styled";
 
-const ProgramForm: React.FC = () => {
+const ExerciseForm: React.FC = ({ }) => {
   const DAYS = 3;
   const [currentDay, setCurrentDay] = useState(0);
   const handleClick = (index: number) => () => setCurrentDay(index);
@@ -107,7 +106,7 @@ const SchemeRubric = styled.span`
   white-space: nowrap;
 `;
 
-export default ProgramForm;
+export default ExerciseForm;
 
 /*
 

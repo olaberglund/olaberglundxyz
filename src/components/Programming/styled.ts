@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  position: relative;
   background-color: #fff;
   display: flex;
   color: ${({ theme }) => theme.text.dark};

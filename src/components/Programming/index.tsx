@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProgramsTabber from './ProgramsTabber';
+import ProgramStepper from './ProgramStepper';
 
 const Programming: React.FC = () => {
 
@@ -8,7 +8,7 @@ const Programming: React.FC = () => {
     <Wrapper>
       <MobileWrapper>
         <Border radius={10}>
-          <ProgramsTabber><SaveButton type="button">Vidare</SaveButton></ProgramsTabber>
+          <ProgramStepper />
         </Border>
       </MobileWrapper>
     </Wrapper>
@@ -68,24 +68,6 @@ const Wrapper = styled.div`
 
   @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
     width: 90%;
-  }
-`;
-
-const SaveButton = styled.button`
-  position: absolute;
-  color: ${({ theme }) => theme.text.light};
-  font-size: ${({ theme }) => theme.text.size.small};
-  border-radius: 20px;
-  border: none;
-  padding: 8px 20px 8px 20px;
-  background-color: ${({ theme }) => theme.color.quaternary};
-  bottom: 1%;
-  left: 50%;
-  transform: translateX(-50%);
-
-  :hover {
-    cursor: pointer;
-    background-color: ${({ theme }) => theme.color.quaternary};
   }
 `;
 

@@ -118,10 +118,9 @@ export const NavBurger = styled.button`
   @media(max-width: ${({ theme }) => theme.breakpoints.medium}) {
     display: block;
     justify-self: end;
-    border-color: ${({ theme }) => theme.text.light};
     color: ${({ theme }) => theme.text.light};
     font-size: ${({ theme }) => theme.text.size.small};
-    border-style: solid;
+    border-style: none;
     border-radius: 10px;
     border-width: 1px;
     padding: 12px;

@@ -67,5 +67,6 @@ export const SidebarElement = styled(Link)`
 
   @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
     animation: 0.3s ease-out slideUpFromBottom;
+    justify-content: center;
   }
 `

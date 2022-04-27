@@ -52,7 +52,7 @@ const theme: DefaultTheme = {
   breakpoints: {
     xl: '1200px',
     large: '1000px',
-    medium: '580px',
+    medium: '768px',
     small: '360px',
   },
 };
