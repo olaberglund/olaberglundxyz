@@ -3,7 +3,6 @@ import ExerciseForm from './ExerciseForm';
 import Tabber from '../Tabber';
 import { Tab } from '../types';
 
-
 const ProgramsTabber: React.FC = ({ children }) => {
 
   const tabs: Tab[] = [

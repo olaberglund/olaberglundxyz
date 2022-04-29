@@ -2,17 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 type Props = {
-  steps: React.FC<{}>[];
-}
-
-type ButtonVariation = {
-  title: 'save';
-  onClick: () => void;
+  steps: React.FC[];
 }
 
 const Stepper: React.FC<Props> = ({ steps }) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const Component = steps[currentStep];
+  const Step = steps[currentStep];
 
   const handleSave = () => {
   }
@@ -46,13 +41,11 @@ const Stepper: React.FC<Props> = ({ steps }) => {
   }
 
   return (
-    Component && (
-      <Component>
-        <Wrapper>
-          {renderButtons().map(b => <StepButton key={b.title} onClick={b.onClick}>{b.title}</StepButton>)}
-        </Wrapper>
-      </Component>
-    )
+    <Step>
+      <Wrapper>
+        {renderButtons().map(b => <StepButton key={b.title} onClick={b.onClick}>{b.title}</StepButton>)}
+      </Wrapper>
+    </Step>
   )
 };
 
