@@ -6,6 +6,7 @@ export const Container = styled.div`
   display: flex;
   color: ${({ theme }) => theme.text.dark};
   flex: 1;
+  height: 100%;
   /* 
     Below is a surprising css trick 
     to fix the dynamic height of this div
@@ -128,19 +129,27 @@ export const RemoveButton = styled.button`
     transform: rotate(-45deg);
   }
 `
-export const TabWindow = styled.div`
+
+type VerticalTabber = {
+  vertical?: boolean,
+}
+
+export const TabWindow = styled.div<VerticalTabber>`
   display: flex;
   position: relative;
-  flex-direction: column;
+  flex-direction: ${(p) => p.vertical ? 'row' : 'column'};
   color: ${({ theme }) => theme.text.light};
   height: 100%;
+  width: 100%;
 `;
 
-export const Tabs = styled.ul`
+export const Tabs = styled.ul<VerticalTabber>`
   list-style-type: none;
   display: flex;
+  flex-direction: ${(p) => p.vertical ? 'column' : 'row'};
   margin: 0;
   padding: 0;
+  flex: ${(p) => p.vertical ? '1' : '0'};
 `;
 
 interface TabProps {
@@ -151,8 +160,10 @@ interface TabProps {
 export const WindowTab = styled.li<TabProps>`
   flex: 1;
   display: flex;
-  place-content: center;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
+  white-space: nowrap;
   max-height: max-content;
   background-color: ${(p) => p.active ? p.theme.color.tertiary : p.theme.color.primary};
   :hover {

@@ -15,7 +15,6 @@ export const signInWithGoogle = async () => {
     const docSnap = await getDoc(userRef);
 
     if (!docSnap.exists()) {
-      console.log("i was run");
       await setDoc(userRef, {
         name: user.displayName ?? user.email
       } as User);

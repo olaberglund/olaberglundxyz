@@ -42,18 +42,10 @@ const Border = styled.div<BorderProps>`
   border: 1px solid white;
   border-top-left-radius: ${(p) => `${p.radius}px`};
   border-top-right-radius: ${(p) => `${p.radius}px`};
-  & > div > ul {
-    li:first-child {
-      border-top-left-radius: ${(p) => `${p.radius}px`};
-    }
-    
-    li:last-child {
-      border-top-right-radius: ${(p) => `${p.radius}px`};
-    }
-  }
   @media(max-width: ${({ theme }) => theme.breakpoints.medium}){
     height: 95%;
   }
+  overflow: hidden;
 `
 
 const Wrapper = styled.div`

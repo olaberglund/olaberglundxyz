@@ -1,11 +1,9 @@
 import React, { useContext, useState } from "react";
-import styled from "styled-components";
 import { ProgramContext } from "../state/context";
 import { addExercise, removeExercise, setCurrentDay } from "../state/reducer";
 import { Container, Exercise, Flex, List, ListItem, Program, ProgramWindow, RemoveButton, Tabs, Title, TitleWrapper, WindowTab } from "../styled";
 
 const ExerciseForm: React.FC = () => {
-  const DAYS = 3;
   const { state, dispatch } = useContext(ProgramContext);
   const handleClick = (index: number) => () => dispatch(setCurrentDay(index));
 
@@ -22,11 +20,13 @@ const ExerciseForm: React.FC = () => {
     "chins",
     "pullups",
     "dips",
+    "seated row",
     "tricep pushdown",
     "sumo deadlift",
     "front squat",
     "jm press",
     "sled push",
+    "bulgarian split squat",
   ].sort();
 
   const handleAddClick = (exercise: string) => () => {
@@ -37,7 +37,7 @@ const ExerciseForm: React.FC = () => {
     dispatch(removeExercise(exercise));
   };
 
-  const tabs = [...Array(DAYS).keys()].map(i => ({ title: `Dag ${i + 1}`, content: state.program[i + 1] }));
+  const tabs = [...Array(state.daysPerWeek).keys()].map(i => ({ title: `Dag ${i + 1}`, content: state.program[i + 1] }));
 
   return (
     <Container>
@@ -72,53 +72,4 @@ const ExerciseForm: React.FC = () => {
   );
 };
 
-const SchemeWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-`
-
-const SchemeRubric = styled.span`
-  text-align: right; 
-  white-space: nowrap;
-`;
-
 export default ExerciseForm;
-
-/*
-
-  let scheme: ExerciseScheme = { exercise: exercise, reps: '', sets: '', kg: '', rpe: '' }
-
-  const setSets = (event: React.ChangeEvent<HTMLInputElement>, exercise: string) => {
-    const index = chosen[currentDay].findIndex(s => s.exercise === exercise);
-    const changed = chosen[currentDay].slice(0);
-    changed[index].sets = event.currentTarget.value;
-
-    setChosen({
-      ...chosen,
-      [currentDay]: changed
-    })
-  };
-
-  const setReps = (event: React.ChangeEvent<HTMLInputElement>, exercise: string) => {
-    const index = chosen[currentDay].findIndex(s => s.exercise === exercise);
-    const changed = chosen[currentDay].slice(0);
-    changed[index].reps = event.currentTarget.value;
-
-    setChosen({
-      ...chosen,
-      [currentDay]: changed
-    })
-  };
-
-  const setKgs = (event: React.ChangeEvent<HTMLInputElement>, exercise: string) => {
-    const index = chosen[currentDay].findIndex(s => s.exercise === exercise);
-    const changed = chosen[currentDay].slice(0);
-    changed[index].kg = event.currentTarget.value;
-
-    setChosen({
-      ...chosen,
-      [currentDay]: changed
-    })
-  };
-
-  */
