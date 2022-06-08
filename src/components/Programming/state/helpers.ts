@@ -27,7 +27,6 @@ const getMetrics = (state: ProgramState, exercise: string, property: keyof Exerc
   const index = schemes.findIndex(s => s.exercise === exercise);
   if (index < 0) return;
   const metrics = schemes[index][property];
-  console.log(`Found ${metrics} for ${exercise} on day ${day}`);
   return metrics;
 }
 

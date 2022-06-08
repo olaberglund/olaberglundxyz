@@ -28,8 +28,8 @@ const ProgramForm: React.FC = ({ children }) => {
 
   /** All weeks' days */
   // TODO: Fix running each time a new day is clicked
-  // Possible solutions: useMemo
   const days = [...Array(state.daysPerWeek * state.weeks).keys()].map((day) => {
+    console.log("Skapar dag: " + day)
     return {
       title: `Dag ${(day % state.daysPerWeek) + 1}`,
       content: (
