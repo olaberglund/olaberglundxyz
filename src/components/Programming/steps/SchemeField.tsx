@@ -25,6 +25,8 @@ const SchemeField: React.FC<Props> = ({ initialValue, onBlur, children }) => {
 
 const SchemeWrapper = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
 `
 

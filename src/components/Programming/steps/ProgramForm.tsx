@@ -23,7 +23,6 @@ const ProgramForm: React.FC = ({ children }) => {
   useEffect(() => {
     const totalDays = state.daysPerWeek * state.weeks;
     const updatedDays = [...Array(totalDays).keys()]
-      .map(i => i + state.currentWeek * state.daysPerWeek)
       .map(day => {
         console.log(day);
         return (
@@ -31,7 +30,7 @@ const ProgramForm: React.FC = ({ children }) => {
         )
       });
     setDays(updatedDays)
-  }, [state.daysPerWeek])
+  }, [state.daysPerWeek, state.weeks])
 
 
   return (

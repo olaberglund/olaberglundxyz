@@ -3,20 +3,19 @@ import styled from 'styled-components';
 
 type Props = {
   steps: React.FC[];
+  onSave: () => void;
 }
 
-const Stepper: React.FC<Props> = ({ steps }) => {
+const Stepper: React.FC<Props> = ({ steps, onSave }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const Step = steps[currentStep];
 
-  const handleSave = () => {
-  }
   const handleMove = (step: number) => () => setCurrentStep(currentStep + step);
 
   const variations = {
     save: {
       title: 'Spara',
-      onClick: handleSave,
+      onClick: onSave,
     },
     next: {
       title: 'Vidare',

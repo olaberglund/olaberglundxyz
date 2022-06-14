@@ -17,7 +17,7 @@ const ProgramStepper: React.FC = () => {
 
   return (
     <ProgramContext.Provider value={{ state, dispatch }}>
-      <Stepper steps={steps} />
+      <Stepper steps={steps} onSave={() => console.log("yo")} />
     </ProgramContext.Provider>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { ProgramContext } from '../state/context';
 import { setCurrentDay } from '../state/reducer';
 import { Tabs, TabWindow, WindowTab } from '../styled';
@@ -26,7 +26,6 @@ const WeekView: React.FC = ({ children }) => {
           )
         })}
       </Tabs>
-      {/* days.length && days[state.currentDay] */}
       {children}
     </TabWindow>
   )

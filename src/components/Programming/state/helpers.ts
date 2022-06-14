@@ -6,24 +6,20 @@ export const getSetsOfExerciseOnDay = (state: ProgramState, exercise: string, da
   return getMetrics(state, exercise, 'sets', day);
 }
 
-export const getSetsOfExercise = (state: ProgramState, exercise: string) => {
-  return getMetrics(state, exercise, 'sets');
+export const getRepsOfExerciseOnDay = (state: ProgramState, exercise: string, day: number) => {
+  return getMetrics(state, exercise, 'reps', day);
 }
 
-export const getRepsOfExercise = (state: ProgramState, exercise: string) => {
-  return getMetrics(state, exercise, 'reps');
+export const getRPEOfExerciseOnDay = (state: ProgramState, exercise: string, day: number) => {
+  return getMetrics(state, exercise, 'rpe', day);
 }
 
-export const getRPEOfExercise = (state: ProgramState, exercise: string) => {
-  return getMetrics(state, exercise, 'rpe');
+export const getWeightOfExerciseOnDay = (state: ProgramState, exercise: string, day: number) => {
+  return getMetrics(state, exercise, 'kgs', day);
 }
 
-export const getWeightOfExercise = (state: ProgramState, exercise: string) => {
-  return getMetrics(state, exercise, 'kgs');
-}
-
-const getMetrics = (state: ProgramState, exercise: string, property: keyof ExerciseScheme, day?: number) => {
-  const schemes = state.program[day ?? getTodayWithWeekOffset(state)];
+const getMetrics = (state: ProgramState, exercise: string, property: keyof ExerciseScheme, day: number) => {
+  const schemes = state.program[day];
   const index = schemes.findIndex(s => s.exercise === exercise);
   if (index < 0) return;
   const metrics = schemes[index][property];
